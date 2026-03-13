@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-imports
 import { LinkProps, default as NextLink } from "next/link";
 import { usePageTransitionStore } from "@/shared/model/page-transition";
 

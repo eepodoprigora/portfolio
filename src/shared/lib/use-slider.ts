@@ -7,8 +7,6 @@ type Params = {
     slidesCount: number;
 };
 
-
-
 const getClosestSlideIndex = (
     slides: HTMLDivElement[],
     slidesCount: number,
@@ -34,7 +32,7 @@ const getClosestSlideIndex = (
     return closestIndex;
 };
 
-export const useProjectsSlider = ({
+export const useSlider = ({
     rootRef,
     slidesRef,
     slidesCount,

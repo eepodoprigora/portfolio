@@ -1,12 +1,15 @@
 import React, { useMemo, useRef } from "react";
 import Image from "next/image";
 import classNames from "classnames";
+import { useThreeProjectsOverlay } from "../model";
+import { useSlider } from "@/shared/lib/use-slider";
+import { AnimatedCounter } from "@/shared/ui/AnimatedCounter";
 import { format2 } from "@/shared/lib/strings";
-import { useProjectsSlider, useThreeProjectsOverlay } from "../model";
+import { ImageShape } from "@/shared/model/types";
 
 type Project = {
   id: string;
-  previewImg: { src: string };
+  previewImg: ImageShape;
 };
 
 type Props = React.HTMLAttributes<HTMLElement> & {
@@ -21,7 +24,7 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
 
   const slidesRef = useRef<HTMLDivElement[]>([]);
 
-  const { progress, currentIndex } = useProjectsSlider({
+  const { progress, currentIndex } = useSlider({
     rootRef,
     slidesRef,
     slidesCount: projects.length,
@@ -51,7 +54,11 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
       ref={rootRef}
       className={classNames("projects-slider", className)}>
       <div className="projects-slider__counter" aria-hidden="true">
-        {format2(currentIndex + 1)}/{format2(projects.length)}
+        <AnimatedCounter value={currentIndex + 1} digits={2} />
+        <span className="projects-slider__counter-separator"> - </span>
+        <span className="projects-slider__counter-total">
+          {format2(projects.length)}
+        </span>
       </div>
 
       <div ref={viewportRef} className="projects-slider__viewport">

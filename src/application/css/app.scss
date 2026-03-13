@@ -7,6 +7,9 @@
 @use "layout/typography";
 @use "layout/common";
 
+// shared
+@use "@/shared/ui/AnimatedCounter/AnimatedCounter.scss";
+
 // entities
 
 @use "@/entities/project/ui/ProjectCard.scss";
