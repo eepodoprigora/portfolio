@@ -1,0 +1,19 @@
+// base
+@use "base/custom-properties";
+@use "base/reset";
+@use "base/fonts";
+
+// atoms
+@use "layout/typography";
+@use "layout/common";
+
+// entities
+
+@use "@/entities/project/ui/ProjectCard.scss";
+
+// widgets
+
+@use "@/widgets/ProjectsSlider/ui/ProjectsSlider.scss";
+
+// pages
+@use "@/pages-view/IndexPageView/IndexPageView.scss";

@@ -1,0 +1,8 @@
+@use "@/application/css/utils/mixins" as *;
+
+.index__content {
+  @include flex-center();
+  height: vh(100);
+  width: 100%;
+  overflow: clip;
+}

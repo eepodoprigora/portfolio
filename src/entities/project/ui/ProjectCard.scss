@@ -1,0 +1,13 @@
+.project-card__media {
+  --ratio: 350/500;
+  aspect-ratio: var(--ratio);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card__img {
+  width: 100%;
+  height: auto;
+}

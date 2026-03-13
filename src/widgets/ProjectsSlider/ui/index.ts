@@ -1,0 +1,1 @@
+export { ProjectsSlider } from './ProjectsSlider'

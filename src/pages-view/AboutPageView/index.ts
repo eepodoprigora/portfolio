@@ -1,0 +1,1 @@
+export { default, type RawProps as AboutPageViewRawProps } from './AboutPageView'

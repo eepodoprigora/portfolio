@@ -1,0 +1,83 @@
+@use "@/application/css/utils/mixins" as *;
+
+.projects-slider {
+  --slide-width: 22em;
+  --slide-padding: 1.5em;
+  --gap: 0;
+  --media-height: 70svh;
+
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  @include desktop-large {
+    --media-height: 60svh;
+    --slide-width: 30em;
+  }
+}
+
+.projects-slider__viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.projects-slider__webgl {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.projects-slider__webgl canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.projects-slider__track {
+  --progress: 0px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: stretch;
+  gap: var(--gap);
+  width: max-content;
+
+  transform: translate3d(var(--progress), -50%, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.projects-slider__slide {
+  flex: 0 0 var(--slide-width);
+  width: var(--slide-width);
+  padding-inline: var(--slide-padding);
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.projects-slider__media {
+  position: relative;
+  width: 100%;
+  height: var(--media-height);
+  overflow: hidden;
+  border-radius: 1.5em;
+  opacity: 0;
+}
+
+.projects-slider__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
