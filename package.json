@@ -12,7 +12,7 @@
     "classnames": "^2.5.1",
     "isomorphic-dompurify": "^3.3.0",
     "motion": "12.4.1",
-    "next": "15.2.1",
+    "next": "15.2.8",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "three": "^0.182.0",
