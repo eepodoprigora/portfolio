@@ -8,9 +8,9 @@ export const Header = () => {
         <Link href={"/"} className="text-xl">
           <RotateText text="Evgenia Podoprigora" />
         </Link>
-        <Link href={"/about"} className="text-l">
+        {/* <Link href={"/about"} className="text-l">
           <RotateText text="About" />
-        </Link>
+        </Link> */}
       </div>
     </header>
   );
