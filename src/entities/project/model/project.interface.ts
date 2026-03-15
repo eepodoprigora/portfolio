@@ -4,5 +4,5 @@ export interface IProject {
     id: string;
     name: string;
     previewImg: ImageShape;
-    slug: string;
+    href: string;
 }

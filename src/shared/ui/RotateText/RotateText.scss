@@ -1,0 +1,53 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.rotate-text {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1;
+
+  @include hover {
+    .rotate-text__char-text--current {
+      transform: translateY(-110%);
+    }
+    .rotate-text__char-text--next {
+      transform: translateY(0%);
+    }
+  }
+}
+
+.rotate-text__inner {
+  display: flex;
+  align-items: center;
+}
+
+.rotate-text__char {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  height: 1.1em;
+}
+
+.rotate-text__char--space {
+  width: 0.3em;
+}
+
+.rotate-text__char-text {
+  display: inline-block;
+  transition: transform $app-medium-duration $app-default-easing;
+  transition-delay: calc(var(--char-index) * 0.02s);
+  will-change: transform;
+}
+
+.rotate-text__char-text--current {
+  transform: translateY(0%);
+}
+
+.rotate-text__char-text--next {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(110%);
+}

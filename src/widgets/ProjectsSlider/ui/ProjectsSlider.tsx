@@ -1,19 +1,14 @@
-import React, { useMemo, useRef } from "react";
-import Image from "next/image";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 import { useThreeProjectsOverlay } from "../model";
 import { useSlider } from "@/shared/lib/use-slider";
 import { AnimatedCounter } from "@/shared/ui/AnimatedCounter";
 import { format2 } from "@/shared/lib/strings";
-import { ImageShape } from "@/shared/model/types";
-
-type Project = {
-  id: string;
-  previewImg: ImageShape;
-};
+import { useAppReadyStore } from "@/shared/model/app-ready";
+import { IProject, ProjectCard } from "@/entities/project";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
-  projects: Project[];
+  projects: IProject[];
 };
 
 export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
@@ -21,8 +16,12 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
+  const slidesRef = useRef<HTMLElement[]>([]);
+  const mediaRefs = useRef<HTMLDivElement[]>([]);
 
-  const slidesRef = useRef<HTMLDivElement[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  const appReady = useAppReadyStore((s) => s.appReady);
 
   const { progress, currentIndex } = useSlider({
     rootRef,
@@ -32,27 +31,44 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
 
   const imageUrls = useMemo(
     () =>
-      projects.map((p) => p.previewImg?.src).filter((s): s is string => !!s),
+      projects
+        .map((project) => project.previewImg?.src)
+        .filter(Boolean) as string[],
     [projects],
   );
 
   useThreeProjectsOverlay({
     hostRef,
-    mediaRefs: slidesRef,
+    mediaRefs,
     imageUrls,
     progressPx: progress,
   });
 
-  const setSlideRef = (index: number) => (node: HTMLDivElement | null) => {
+  const setSlideRef = (index: number) => (node: HTMLElement | null) => {
     if (!node) return;
     slidesRef.current[index] = node;
   };
+
+  const setMediaRef = (index: number) => (node: HTMLDivElement | null) => {
+    if (!node) return;
+    mediaRefs.current[index] = node;
+  };
+
+  useEffect(() => {
+    setMounted(true);
+
+    return () => {
+      setMounted(false);
+    };
+  }, []);
 
   return (
     <section
       {...props}
       ref={rootRef}
-      className={classNames("projects-slider", className)}>
+      className={classNames("projects-slider", className, {
+        "projects-slider--ready": appReady && mounted,
+      })}>
       <div className="projects-slider__counter" aria-hidden="true">
         <AnimatedCounter value={currentIndex + 1} digits={2} />
         <span className="projects-slider__counter-separator"> - </span>
@@ -73,17 +89,12 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
           className="projects-slider__track"
           style={{ "--progress": `${progress}px` } as React.CSSProperties}>
           {projects.map((project, index) => (
-            <article key={project.id} className="projects-slider__slide">
-              <div ref={setSlideRef(index)} className="projects-slider__media">
-                <Image
-                  className="projects-slider__image"
-                  src={project.previewImg.src}
-                  alt=""
-                  fill
-                  draggable={false}
-                />
-              </div>
-            </article>
+            <ProjectCard
+              key={project.id}
+              {...project}
+              setSlideRef={setSlideRef(index)}
+              setMediaRef={setMediaRef(index)}
+            />
           ))}
         </div>
       </div>

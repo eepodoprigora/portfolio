@@ -1,0 +1,37 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.project-card {
+  @include flex-center;
+  width: var(--slide-width);
+  flex-shrink: 0;
+  padding-inline: var(--slide-padding);
+  pointer-events: all;
+  position: relative;
+
+  @include hover {
+    &:before {
+      opacity: 0.4;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    background-color: $black;
+    opacity: 0;
+    transition: opacity $app-default-easing $app-medium-duration;
+  }
+}
+
+.project-card__media {
+  width: 100%;
+  aspect-ratio: var(--ratio);
+  opacity: 0;
+}
+
+.project-card__link {
+  position: absolute;
+  inset: 0;
+}

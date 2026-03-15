@@ -6,6 +6,21 @@ import { AnimatePresence } from "motion/react";
 import { CommonPageProps } from "@/shared/model/types";
 import { usePageTransitionStore } from "@/shared/model/page-transition";
 import { usePrevious } from "@/shared/lib/use-previous";
+import { Preloader } from "@/shared/ui/Preloader";
+import AppInits from "@/application/AppInits";
+import { Header } from "@/widgets/Header";
+import { PageTransitionOverlay } from "@/shared/ui/PageTransitionOverlay";
+import { usePageTransition } from "@/shared/lib/page-transitions";
+
+type PageTransitionPresenceProps = {
+  children: ReactNode;
+};
+
+const PageTransitionPresence = ({ children }: PageTransitionPresenceProps) => {
+  usePageTransition();
+
+  return <>{children}</>;
+};
 
 const AnimatedPage = ({
   pageProps,
@@ -20,6 +35,7 @@ const AnimatedPage = ({
   return (
     <AnimatePresence
       mode={mode}
+      initial={false}
       onExitComplete={() => {
         if (prevBodyClass) {
           document.documentElement.classList.remove(
@@ -41,12 +57,20 @@ const AnimatedPage = ({
   );
 };
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps, router }: AppProps<CommonPageProps>) => {
   return (
     <>
+      <Preloader />
+      <AppInits />
+      <PageTransitionOverlay />
+
       <main className="main">
+        <Header />
+
         <AnimatedPage pageProps={pageProps}>
-          <Component {...pageProps} />
+          <PageTransitionPresence key={router.asPath}>
+            <Component {...pageProps} />
+          </PageTransitionPresence>
         </AnimatedPage>
       </main>
     </>

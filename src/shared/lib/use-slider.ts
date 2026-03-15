@@ -3,12 +3,12 @@ import { RefObject, useEffect, useState } from "react";
 
 type Params = {
     rootRef: RefObject<HTMLElement | null>;
-    slidesRef: RefObject<HTMLDivElement[]>;
+    slidesRef: RefObject<HTMLElement[]>;
     slidesCount: number;
 };
 
 const getClosestSlideIndex = (
-    slides: HTMLDivElement[],
+    slides: HTMLElement[],
     slidesCount: number,
     progress: number,
 ) => {

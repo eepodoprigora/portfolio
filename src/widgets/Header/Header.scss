@@ -1,0 +1,16 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  @include flex-center();
+  z-index: 10;
+}
+
+.header__wrapper {
+  @include flex-center(row, space-between);
+}

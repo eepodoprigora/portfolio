@@ -8,15 +8,18 @@
 @use "layout/common";
 
 // shared
+@use "@/shared/ui/TextAnimation/TextAnimation.scss";
+@use "@/shared/ui/RotateText/RotateText.scss";
 @use "@/shared/ui/AnimatedCounter/AnimatedCounter.scss";
-
+@use "@/shared/ui/Preloader/Preloader.scss";
+@use "@/shared/ui/PageTransitionOverlay/PageTransitionOverlay.scss";
 // entities
 
 @use "@/entities/project/ui/ProjectCard.scss";
 
 // widgets
-
 @use "@/widgets/ProjectsSlider/ui/ProjectsSlider.scss";
+@use "@/widgets/Header/Header.scss";
 
 // pages
 @use "@/pages-view/IndexPageView/IndexPageView.scss";

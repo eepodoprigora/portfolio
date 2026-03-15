@@ -1,0 +1,111 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-transition-overlay__shape {
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: 140vh;
+  transform: translate3d(0, 100%, 0);
+  will-change: transform;
+}
+
+.page-transition-overlay__shape::before,
+.page-transition-overlay__shape::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ef4444;
+}
+
+.page-transition-overlay__shape::before {
+  bottom: 0;
+  top: 12vh;
+  left: -8vw;
+  width: 116vw;
+  height: 128vh;
+  border-radius: 0 0 18vw 18vw;
+}
+
+.page-transition-overlay__shape::after {
+  top: 0;
+  left: -10vw;
+  width: 120vw;
+  height: 34vh;
+  background:
+    radial-gradient(40% 120% at 10% 100%, #ef4444 98%, transparent 100%),
+    radial-gradient(32% 120% at 32% 100%, #ef4444 98%, transparent 100%),
+    radial-gradient(38% 120% at 55% 100%, #ef4444 98%, transparent 100%),
+    radial-gradient(34% 120% at 78% 100%, #ef4444 98%, transparent 100%),
+    radial-gradient(42% 120% at 100% 100%, #ef4444 98%, transparent 100%);
+  background-repeat: no-repeat;
+  transform-origin: 50% 100%;
+}
+
+.page-transition-overlay--transitioning .page-transition-overlay__shape {
+  animation: page-transition-overlay-shape $app-medium-duration
+    $app-default-easing forwards;
+}
+
+.page-transition-overlay--transitioning .page-transition-overlay__shape::after {
+  animation: page-transition-overlay-crest $app-medium-duration
+    $app-default-easing forwards;
+}
+
+.page-transition-overlay--loading {
+  pointer-events: auto;
+}
+
+@keyframes page-transition-overlay-shape {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  18% {
+    transform: translate3d(0, 78%, 0);
+  }
+
+  42% {
+    transform: translate3d(0, 32%, 0);
+  }
+
+  68% {
+    transform: translate3d(0, -8%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes page-transition-overlay-crest {
+  0% {
+    transform: translate3d(0, 0, 0) scaleY(1.18) scaleX(1);
+    filter: blur(0);
+  }
+
+  20% {
+    transform: translate3d(0, 2vh, 0) scaleY(1.1) scaleX(1.02);
+  }
+
+  45% {
+    transform: translate3d(0, -1vh, 0) scaleY(0.92) scaleX(1.04);
+  }
+
+  70% {
+    transform: translate3d(0, -2vh, 0) scaleY(0.82) scaleX(1.01);
+  }
+
+  100% {
+    transform: translate3d(0, -3vh, 0) scaleY(0.72) scaleX(1);
+    filter: blur(0.5px);
+  }
+}

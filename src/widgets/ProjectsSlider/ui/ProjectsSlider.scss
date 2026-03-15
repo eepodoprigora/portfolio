@@ -1,4 +1,5 @@
 @use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
 
 .projects-slider {
   --slide-width: 22vw;
@@ -27,6 +28,12 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  transform: translateX(70%);
+  transition: transform 0.7s $app-default-easing;
+
+  .projects-slider--ready & {
+    transform: translateX(0);
+  }
 }
 
 .projects-slider__webgl {
@@ -53,25 +60,10 @@
   align-items: center;
   gap: var(--gap);
   width: max-content;
-
+  z-index: 2;
   transform: translate3d(var(--progress), -50%, 0);
   will-change: transform;
   backface-visibility: hidden;
-}
-
-.projects-slider__slide {
-  @include flex-center;
-  width: var(--slide-width);
-  flex-shrink: 0;
-  padding-inline: var(--slide-padding);
-  pointer-events: all;
-}
-
-.projects-slider__media {
-  position: relative;
-  width: 100%;
-  aspect-ratio: var(--ratio);
-  opacity: 0;
 }
 
 .projects-slider__counter {

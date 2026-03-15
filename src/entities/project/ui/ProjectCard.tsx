@@ -1,27 +1,43 @@
-import { RefObject } from "react";
-import { IProject } from "../model";
 import Image from "next/image";
+import classNames from "classnames";
+import { IProject } from "../model";
 
 type Props = IProject &
   React.HTMLAttributes<HTMLElement> & {
-    ref?: RefObject<HTMLAnchorElement | null>;
+    setSlideRef?: (node: HTMLElement | null) => void;
+    setMediaRef?: (node: HTMLDivElement | null) => void;
   };
 
-export const ProjectCard = ({ id, slug, name, previewImg, ...rest }: Props) => {
+export const ProjectCard = ({
+  href,
+  setSlideRef,
+  setMediaRef,
+  name,
+  previewImg,
+  className,
+  ...props
+}: Props) => {
   return (
-    <article {...rest} className="projects-slider__item">
-      <a className="project-card" href={`/projects/${slug}`}>
-        <div className="project-card__media">
-          <Image
-            className="project-card__img"
-            src={previewImg.src}
-            alt={name}
-            width={350}
-            height={500}
-            loading="eager"
-          />
-        </div>
-      </a>
+    <article
+      {...props}
+      ref={setSlideRef}
+      className={classNames("project-card", className)}>
+      <div ref={setMediaRef} className="project-card__media">
+        <Image
+          className="project-card__image"
+          src={previewImg.src}
+          alt={name}
+          fill
+          draggable={false}
+        />
+      </div>
+
+      <a
+        className="project-card__link"
+        href={href}
+        aria-label={name}
+        target="_blank"
+      />
     </article>
   );
 };
