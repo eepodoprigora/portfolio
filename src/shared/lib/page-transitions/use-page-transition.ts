@@ -1,5 +1,5 @@
 import { usePresence } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
     DEFAULT_MODE,
     DEFAULT_NAME,
@@ -7,7 +7,6 @@ import {
     usePageTransitionStore,
 } from "@/shared/model/page-transition";
 import { leaveInstant } from "./leave-instant";
-import { PAGE_TRANSITION_DURATION } from "@/shared/сonfig/const";
 
 export type LeaveFn = (data: {
     targetElement?: Element | null;
@@ -17,7 +16,6 @@ const leaveFnMap: Record<PageTransitionName, LeaveFn> = {
     default: leaveInstant,
     instant: leaveInstant,
 };
-
 
 export const usePageTransition = () => {
     const name = usePageTransitionStore((state) => state.name);
@@ -29,27 +27,18 @@ export const usePageTransition = () => {
         (state) => state.setIsTransitioning,
     );
     const [isPresent, safeToRemove] = usePresence();
+    const isStartedRef = useRef(false);
 
     useEffect(() => {
-        if (isPresent) {
+        if (isPresent || isStartedRef.current) {
             return;
         }
 
-        let isCancelled = false;
+        isStartedRef.current = true;
 
-        const run = async () => {
-            setIsTransitioning(true);
+        setIsTransitioning(true);
 
-            await leaveFnMap[name]({ targetElement });
-
-            await new Promise<void>((resolve) => {
-                window.setTimeout(resolve, PAGE_TRANSITION_DURATION);
-            });
-
-            if (isCancelled) {
-                return;
-            }
-
+        leaveFnMap[name]({ targetElement }).then(() => {
             safeToRemove();
 
             setPageTransition({
@@ -58,15 +47,7 @@ export const usePageTransition = () => {
                 targetElement: null,
                 isLoading: false,
             });
-
-            setIsTransitioning(false);
-        };
-
-        run();
-
-        return () => {
-            isCancelled = true;
-        };
+        });
     }, [
         isPresent,
         name,

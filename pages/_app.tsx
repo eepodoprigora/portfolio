@@ -31,6 +31,9 @@ const AnimatedPage = ({
 }) => {
   const prevBodyClass = usePrevious(pageProps.bodyClass);
   const mode = usePageTransitionStore((state) => state.mode);
+  const setIsTransitioning = usePageTransitionStore(
+    (state) => state.setIsTransitioning,
+  );
 
   return (
     <AnimatePresence
@@ -48,7 +51,7 @@ const AnimatedPage = ({
             ...pageProps.bodyClass.split(" "),
           );
         }
-
+        setIsTransitioning(false);
         window.scrollTo({ top: 0, behavior: "auto" });
         document.dispatchEvent(new Event("new-page-ready"));
       }}>

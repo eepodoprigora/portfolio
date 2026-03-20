@@ -50,8 +50,8 @@
   }
 }
 
-@supports (height: 100lvh) {
+@supports (height: 100dvh) {
   :root {
-    --mobile-vh: 1lvh;
+    --mobile-vh: 1dvh;
   }
 }

@@ -15,7 +15,7 @@ export const PageTransitionOverlay = ({ className, ...props }: RawProps) => {
       className={classNames("page-transition-overlay", className, {
         "page-transition-overlay--transitioning": isTransitioning,
       })}>
-      <div className="page-transition-overlay__shape"></div>
+      <div className="page-transition-overlay__circle" />
     </div>
   );
 };
