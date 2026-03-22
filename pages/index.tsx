@@ -23,8 +23,10 @@ export default IndexPage;
 type PageProps = CommonPageProps & IndexPageViewRawProps;
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const commonPageProps = await getCommonPageProps();
-  const projects = await getProjects();
+  const [commonPageProps, projects] = await Promise.all([
+    getCommonPageProps(),
+    getProjects(),
+  ]);
 
   return {
     props: {
@@ -35,7 +37,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
         title: "ВКИ",
       },
       breadcrumbs: [],
-      h1: "",
+      h1: "Evgenia's P Portfolio",
       projects: projects,
     } satisfies PageProps,
     revalidate: 60,

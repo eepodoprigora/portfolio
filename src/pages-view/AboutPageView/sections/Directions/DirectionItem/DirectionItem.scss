@@ -1,0 +1,47 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.direction__wrapper {
+  width: 65%;
+  margin-left: auto;
+  margin-right: 0;
+
+  @include tablet {
+    width: 100%;
+  }
+}
+
+.direction__title {
+  --mb: 40px;
+  margin-bottom: var(--mb);
+  text-transform: none;
+}
+
+.direction__description {
+  --mb: 60px;
+  opacity: 0.7;
+  width: 70%;
+  margin-bottom: var(--mb);
+}
+
+.direction__list {
+  --pb: 120px;
+  border-top: 1px solid rgba($light-1, 0.2);
+  padding-bottom: var(--pb);
+  &:not(:last-child) {
+    --pb: 120px;
+  }
+}
+
+.direction__list-item {
+  --pv: 15px;
+  padding: var(--pv) 0;
+  border-bottom: 1px solid rgba($light-1, 0.2);
+  display: flex;
+  justify-content: space-between;
+}
+
+.direction__list-count {
+  color: $blue;
+  opacity: 0.5;
+}

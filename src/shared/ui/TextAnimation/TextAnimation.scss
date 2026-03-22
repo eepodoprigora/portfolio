@@ -2,41 +2,32 @@
 @use "@/application/css/base/variables" as *;
 
 .text-animation {
-  --text-animation-duration: 0.8s;
-  --text-animation-opacity: 0.5s;
-}
-
-.text-animation-split-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.text-animation-line {
   display: block;
+  white-space: pre-wrap;
+}
+
+.text-animation-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
 }
 
 .text-animation-item {
   display: inline-block;
   opacity: 0;
-  transform: translate3d(0, 1em, 0);
+  transform: translateY(100%);
+  will-change: transform, opacity;
   transition:
-    opacity var(--text-animation-opacity) $app-default-easing,
-    transform var(--text-animation-duration) $app-default-easing;
-  will-change: opacity, transform;
-}
-
-.text-animation-state-idle .text-animation-item {
-  opacity: 0;
-  transform: translate3d(0, 1em, 0);
+    transform var(--text-animation-duration, 0.5s) $app-default-easing,
+    opacity var(--text-animation-duration, 0.5s) $app-default-easing;
 }
 
 .text-animation-state-enter .text-animation-item {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translateY(0);
 }
 
 .text-animation-state-exit .text-animation-item {
   opacity: 0;
-  transform: translate3d(0, -1em, 0);
+  transform: translateY(-100%);
 }

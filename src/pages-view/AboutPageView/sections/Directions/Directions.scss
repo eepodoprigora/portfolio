@@ -1,0 +1,11 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.directions {
+  --p: 120px;
+  padding: var(--p) 0;
+
+  @include tablet {
+    --p: 100px;
+  }
+}

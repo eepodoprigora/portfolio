@@ -8,6 +8,7 @@ const IndexPageView = ({ h1, projects }: RawProps) => {
   return (
     <DefaultLayout>
       <div className="index__content">
+        <h1 className="visually-hidden">{h1}</h1>
         <ProjectsSlider projects={projects} />
       </div>
     </DefaultLayout>

@@ -1,10 +1,10 @@
 import React, { ElementType, ReactNode, useMemo } from "react";
 import classNames from "classnames";
 
-type SplitMode = "letters" | "words" | "lines" | "none";
+type SplitMode = "letters" | "words" | "none";
 type AnimationState = "idle" | "enter" | "exit";
 
-type TextAnimationProps<T extends ElementType> = {
+type RawProps<T extends ElementType> = {
   as?: T;
   text?: string;
   children?: ReactNode;
@@ -13,7 +13,10 @@ type TextAnimationProps<T extends ElementType> = {
   className?: string;
   stagger?: number;
   duration?: number;
-} & React.HTMLAttributes<HTMLElement>;
+};
+
+type Props<T extends ElementType> = React.HTMLAttributes<HTMLElement> &
+  RawProps<T>;
 
 const splitText = (text: string, split: SplitMode) => {
   if (split === "none") {
@@ -24,12 +27,10 @@ const splitText = (text: string, split: SplitMode) => {
     return Array.from(text);
   }
 
-  if (split === "words") {
-    return text.split(/(\s+)/).filter(Boolean);
-  }
-
-  return text.split("\n");
+  return text.split(/(\s+)/);
 };
+
+const preserveSpaces = (value: string) => value.replace(/ /g, "\u00A0");
 
 export const TextAnimation = <T extends ElementType = "div">({
   as,
@@ -38,11 +39,11 @@ export const TextAnimation = <T extends ElementType = "div">({
   split = "none",
   state = "idle",
   className,
-  stagger = 0.04,
-  duration = 0.8,
+  stagger = 0.03,
+  duration = 0.5,
   style,
   ...props
-}: TextAnimationProps<T>) => {
+}: Props<T>) => {
   const Tag = (as || "div") as ElementType;
 
   const content =
@@ -66,7 +67,6 @@ export const TextAnimation = <T extends ElementType = "div">({
       "text-animation-split-none": split === "none",
       "text-animation-split-letters": split === "letters",
       "text-animation-split-words": split === "words",
-      "text-animation-split-lines": split === "lines",
       "text-animation-state-idle": state === "idle",
       "text-animation-state-enter": state === "enter",
       "text-animation-state-exit": state === "exit",
@@ -82,6 +82,22 @@ export const TextAnimation = <T extends ElementType = "div">({
     );
   }
 
+  if (split === "none") {
+    return (
+      <Tag
+        {...props}
+        className={rootClassName}
+        style={
+          {
+            ...style,
+            "--text-animation-duration": `${duration}s`,
+          } as React.CSSProperties
+        }>
+        {content}
+      </Tag>
+    );
+  }
+
   return (
     <Tag
       {...props}
@@ -92,39 +108,29 @@ export const TextAnimation = <T extends ElementType = "div">({
           "--text-animation-duration": `${duration}s`,
         } as React.CSSProperties
       }>
-      {split === "none" &&
-        parts.map((part, index) => (
-          <React.Fragment key={index}>{part}</React.Fragment>
-        ))}
+      {parts.map((part, index) => {
+        if (!part) {
+          return null;
+        }
 
-      {(split === "letters" || split === "words") &&
-        parts.map((part, index) => {
-          const isSpace = /^\s+$/.test(part);
+        const isSpace = /^\s+$/.test(part);
 
-          if (isSpace) {
-            return <React.Fragment key={index}>{part}</React.Fragment>;
-          }
-
+        if (isSpace) {
           return (
-            <span
-              className="text-animation-item"
-              key={index}
-              style={{ transitionDelay: `${index * stagger}s` }}>
-              {part}
-            </span>
+            <React.Fragment key={index}>{preserveSpaces(part)}</React.Fragment>
           );
-        })}
+        }
 
-      {split === "lines" &&
-        parts.map((part, index) => (
-          <span className="text-animation-line" key={index}>
+        return (
+          <span className="text-animation-wrap" key={index}>
             <span
               className="text-animation-item"
               style={{ transitionDelay: `${index * stagger}s` }}>
               {part}
             </span>
           </span>
-        ))}
+        );
+      })}
     </Tag>
   );
 };

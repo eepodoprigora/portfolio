@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef } from "react";
 import classNames from "classnames";
 import { useThreeProjectsOverlay } from "../model";
 import { useSlider } from "@/shared/lib/use-slider";
@@ -6,6 +6,7 @@ import { AnimatedCounter } from "@/shared/ui/AnimatedCounter";
 import { format2 } from "@/shared/lib/strings";
 import { useAppReadyStore } from "@/shared/model/app-ready";
 import { IProject, ProjectCard } from "@/entities/project";
+import { useInView } from "motion/react";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
   projects: IProject[];
@@ -18,8 +19,7 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
   const hostRef = useRef<HTMLDivElement>(null);
   const slidesRef = useRef<HTMLElement[]>([]);
   const mediaRefs = useRef<HTMLDivElement[]>([]);
-
-  const [mounted, setMounted] = useState(false);
+  const inView = useInView(rootRef);
 
   const appReady = useAppReadyStore((s) => s.appReady);
 
@@ -54,20 +54,12 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
     mediaRefs.current[index] = node;
   };
 
-  useEffect(() => {
-    setMounted(true);
-
-    return () => {
-      setMounted(false);
-    };
-  }, []);
-
   return (
     <section
       {...props}
       ref={rootRef}
       className={classNames("projects-slider", className, {
-        "projects-slider--ready": appReady && mounted,
+        "projects-slider--ready": inView && appReady,
       })}>
       <div className="projects-slider__counter" aria-hidden="true">
         <AnimatedCounter value={currentIndex + 1} digits={2} />

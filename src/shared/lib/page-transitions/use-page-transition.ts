@@ -1,59 +1,94 @@
-import { usePresence } from "motion/react";
-import { useEffect, useRef } from "react";
-import {
-    DEFAULT_MODE,
-    DEFAULT_NAME,
-    PageTransitionName,
-    usePageTransitionStore,
-} from "@/shared/model/page-transition";
-import { leaveInstant } from "./leave-instant";
+import { usePresence } from 'motion/react';
+import { useEffect, useRef } from 'react';
+import { PageTransitionName, usePageTransitionStore } from '@/shared/model/page-transition';
+import { leaveInstant } from './leave-instant';
+import { curtainLeave } from './curtain';
+import { PAGE_TRANSITION_ENTER_MS } from '@/shared/сonfig/const';
 
-export type LeaveFn = (data: {
-    targetElement?: Element | null;
-}) => Promise<void>;
+export type LeaveFn = (data: { targetElement?: Element | null }) => Promise<void>;
 
 const leaveFnMap: Record<PageTransitionName, LeaveFn> = {
-    default: leaveInstant,
+    default: curtainLeave,
     instant: leaveInstant,
 };
+
+let sharedLeavePromise: Promise<void> | null = null;
 
 export const usePageTransition = () => {
     const name = usePageTransitionStore((state) => state.name);
     const targetElement = usePageTransitionStore((state) => state.targetElement);
-    const setPageTransition = usePageTransitionStore(
-        (state) => state.setPageTransition,
-    );
-    const setIsTransitioning = usePageTransitionStore(
-        (state) => state.setIsTransitioning,
-    );
+    const resetPageTransition = usePageTransitionStore((state) => state.resetPageTransition);
+    const setIsLeaving = usePageTransitionStore((state) => state.setIsLeaving);
+    const setIsEntering = usePageTransitionStore((state) => state.setIsEntering);
     const [isPresent, safeToRemove] = usePresence();
-    const isStartedRef = useRef(false);
+
+    const hasStartedExitRef = useRef(false);
+    const hasHandledEnterRef = useRef(false);
 
     useEffect(() => {
-        if (isPresent || isStartedRef.current) {
+        if (isPresent || hasStartedExitRef.current) {
             return;
         }
 
-        isStartedRef.current = true;
+        hasStartedExitRef.current = true;
 
-        setIsTransitioning(true);
+        const isOwner = !sharedLeavePromise;
 
-        leaveFnMap[name]({ targetElement }).then(() => {
+        if (isOwner) {
+            setIsLeaving(true);
+            setIsEntering(false);
+
+            sharedLeavePromise = leaveFnMap[name]({ targetElement }).then(() => {
+                resetPageTransition();
+            });
+        }
+
+        let isCancelled = false;
+
+        const run = async () => {
+            await sharedLeavePromise;
+
+            if (isCancelled) {
+                return;
+            }
+
             safeToRemove();
 
-            setPageTransition({
-                mode: DEFAULT_MODE,
-                name: DEFAULT_NAME,
-                targetElement: null,
-                isLoading: false,
-            });
-        });
+            if (isOwner) {
+                sharedLeavePromise = null;
+                setIsLeaving(false);
+                setIsEntering(true);
+            }
+        };
+
+        void run();
+
+        return () => {
+            isCancelled = true;
+        };
     }, [
         isPresent,
         name,
-        targetElement,
+        resetPageTransition,
         safeToRemove,
-        setIsTransitioning,
-        setPageTransition,
+        setIsEntering,
+        setIsLeaving,
+        targetElement,
     ]);
+
+    useEffect(() => {
+        if (!isPresent || hasHandledEnterRef.current) {
+            return;
+        }
+
+        hasHandledEnterRef.current = true;
+
+        const timeoutId = window.setTimeout(() => {
+            setIsEntering(false);
+        }, PAGE_TRANSITION_ENTER_MS);
+
+        return () => {
+            window.clearTimeout(timeoutId);
+        };
+    }, [isPresent, setIsEntering]);
 };
