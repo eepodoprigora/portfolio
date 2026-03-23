@@ -45,6 +45,7 @@ export const Hero = ({
             sources={image}
             sizes="100vw"
             className="hero__image"
+            loading="eager"
           />
           <MarqueeText text={h1} />
           {(textBlock1 || textBlock2) && (

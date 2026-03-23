@@ -105,6 +105,7 @@ export const Contacts = ({
                   alt={image.alt ?? header ?? "Контакты"}
                   title={image.title}
                   className="contacts__image"
+                  loading="lazy"
                 />
                 <div className="contacts__image-liquid" />
               </div>
