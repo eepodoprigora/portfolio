@@ -79,6 +79,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
         cta: "Есть идея или проект? Напишите мне",
         social: contacts,
         image: { src: "/static/about/about_bottom_new.jpg" },
+        rights: "© 2026 Evgenia Podoprigora. Все права защищены.",
       },
     } satisfies PageProps,
     revalidate: 60,

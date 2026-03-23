@@ -23,6 +23,8 @@
   --pv: 80px;
   padding: var(--pv) 0;
   width: 50%;
+  display: flex;
+  flex-direction: column;
   @include tablet {
     width: 100%;
   }
@@ -127,4 +129,11 @@
     background-position: 200% 50%;
     transform: translate3d(-8%, 0, 0) skewX(-16deg) scaleX(1.15);
   }
+}
+
+.contacts__rights {
+  --pt: 40px;
+  padding-top: var(--pt);
+  margin-top: auto;
+  opacity: 0.7;
 }

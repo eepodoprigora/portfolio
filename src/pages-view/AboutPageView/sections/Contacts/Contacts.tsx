@@ -18,6 +18,7 @@ export type RawProps = {
   cta?: string | null;
   social: ContactsGroupRawProps[];
   image: ImageShape | null;
+  rights: string;
 };
 
 type Props = React.HTMLAttributes<HTMLElement> &
@@ -30,6 +31,7 @@ export const Contacts = ({
   cta,
   social,
   image,
+  rights,
   className,
   ref,
   ...props
@@ -94,6 +96,7 @@ export const Contacts = ({
                 );
               })}
             </div>
+            <div className="contacts__rights">{rights}</div>
           </div>
 
           <div className="contacts__media">
