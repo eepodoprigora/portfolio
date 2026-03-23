@@ -11,7 +11,7 @@ type Props = Omit<
 
 const Link = ({ ref, children, ...props }: Props) => {
   const isPageTransitioning = usePageTransitionStore(
-    (state) => state.isTransitioning,
+    (state) => state.isLeaving,
   );
 
   return (
