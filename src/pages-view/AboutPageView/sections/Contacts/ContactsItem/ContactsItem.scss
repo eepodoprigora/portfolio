@@ -1,0 +1,35 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.contacts__item {
+  --mb: 10px;
+  margin-bottom: var(--mb);
+}
+
+.contacts__item-title {
+  padding-right: 5px;
+  font-weight: 600;
+}
+
+.contacts__link {
+  transition: opacity $app-medium-duration $app-default-easing;
+  @include hover {
+    opacity: 0.7;
+  }
+}
+
+.contacts__item--github {
+  .contacts__link {
+    display: flex;
+    align-items: center;
+  }
+  .contacts__item-icon {
+    --size: 20px;
+    --mr: 5px;
+    width: var(--size);
+    height: var(--size);
+    margin-right: var(--mr);
+    display: inline-flex;
+    background-image: url("/static/social/github.svg");
+  }
+}

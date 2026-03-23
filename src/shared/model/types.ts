@@ -33,6 +33,10 @@ export type ImageShape = {
     title?: string;
 };
 
+export type OrientationImageShape = {
+    horizontal: ImageShape | null;
+    vertical: ImageShape | null;
+};
 
 
 

@@ -22,7 +22,7 @@ export const Preloader = () => {
 
     const exitTimer = setTimeout(() => {
       setLettersState("exit");
-    }, 2400);
+    }, 2000);
 
     return () => {
       clearTimeout(enterTimer);

@@ -14,3 +14,20 @@
 .header__wrapper {
   @include flex-center(row, space-between);
 }
+
+.header--dark {
+  color: $black;
+}
+
+.header__about {
+  .about-page & {
+    display: none;
+  }
+}
+
+.header__main {
+  display: none;
+  .about-page & {
+    display: block;
+  }
+}

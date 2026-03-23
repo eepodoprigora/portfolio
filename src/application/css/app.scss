@@ -6,6 +6,9 @@
 // atoms
 @use "layout/typography";
 @use "layout/common";
+@use "@/shared/ui/OrientationImage/OrientationImage.scss";
+@use "@/shared/ui/Reveal/Reveal.scss";
+@use "@/shared/ui/MarqueeText/MarqueeText.scss";
 
 // shared
 @use "@/shared/ui/TextAnimation/TextAnimation.scss";
@@ -13,13 +16,21 @@
 @use "@/shared/ui/AnimatedCounter/AnimatedCounter.scss";
 @use "@/shared/ui/Preloader/Preloader.scss";
 @use "@/shared/ui/PageTransitionOverlay/PageTransitionOverlay.scss";
-// entities
 
+// entities
 @use "@/entities/project/ui/ProjectCard.scss";
 
 // widgets
 @use "@/widgets/ProjectsSlider/ui/ProjectsSlider.scss";
 @use "@/widgets/Header/Header.scss";
+
+// sections
+@use "@/pages-view/AboutPageView/sections/Directions/DirectionItem/DirectionItem.scss";
+@use "@/pages-view/AboutPageView/sections/Contacts/ContactsItem/ContactsItem.scss";
+@use "@/pages-view/AboutPageView/sections/Hero/Hero.scss";
+@use "@/pages-view/AboutPageView/sections/Intro/Intro.scss";
+@use "@/pages-view/AboutPageView/sections/Directions/Directions.scss";
+@use "@/pages-view/AboutPageView/sections/Contacts/Contacts.scss";
 
 // pages
 @use "@/pages-view/IndexPageView/IndexPageView.scss";

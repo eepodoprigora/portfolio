@@ -1,0 +1,1 @@
+export { getContacts } from './contacts.repo'

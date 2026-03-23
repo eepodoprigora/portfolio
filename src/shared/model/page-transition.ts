@@ -1,54 +1,48 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-export type PageTransitionName = "default" | "instant";
+export type PageTransitionName = 'default' | 'instant';
+export type PageTransitionMode = 'wait' | 'sync' | 'popLayout';
 
-export const DEFAULT_MODE = "wait";
-export const DEFAULT_NAME = "default";
+export const DEFAULT_MODE: PageTransitionMode = 'wait';
+export const DEFAULT_NAME: PageTransitionName = 'default';
 
 type State = {
-    mode: "wait" | "sync" | "popLayout";
+    mode: PageTransitionMode;
     name: PageTransitionName;
     targetElement?: Element | null;
-    nextPathname?: string;
-    isTransitioning: boolean;
-    isLoading: boolean;
+    isLeaving: boolean;
+    isEntering: boolean;
 };
 
 type Action = {
-    setPageTransition: (
-        transition: Partial<Omit<State, "isTransitioning" | "nextPathname">>,
-    ) => void;
-    setIsTransitioning: (bool: boolean) => void;
-    setIsLoading: (bool: boolean) => void;
-    setNextPathname: (pathname: string) => void;
+    setPageTransition: (transition: Omit<State, 'isLeaving' | 'isEntering'>) => void;
+    resetPageTransition: () => void;
+    setIsLeaving: (value: boolean) => void;
+    setIsEntering: (value: boolean) => void;
 };
 
 export const usePageTransitionStore = create<State & Action>((set) => ({
     mode: DEFAULT_MODE,
     name: DEFAULT_NAME,
     targetElement: null,
-    nextPathname: undefined,
-    isTransitioning: false,
-    isLoading: false,
-
+    isLeaving: false,
+    isEntering: false,
     setPageTransition: (transition) =>
-        set((state) => ({
-            ...state,
+        set(() => ({
             ...transition,
         })),
-
-    setIsTransitioning: (bool) =>
+    resetPageTransition: () =>
         set(() => ({
-            isTransitioning: bool,
+            mode: DEFAULT_MODE,
+            name: DEFAULT_NAME,
+            targetElement: null,
         })),
-
-    setIsLoading: (bool) =>
+    setIsLeaving: (value) =>
         set(() => ({
-            isLoading: bool,
+            isLeaving: value,
         })),
-
-    setNextPathname: (pathname) =>
+    setIsEntering: (value) =>
         set(() => ({
-            nextPathname: pathname,
+            isEntering: value,
         })),
 }));

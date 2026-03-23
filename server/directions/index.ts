@@ -1,0 +1,1 @@
+export { getDirections, getDirectionCategories } from './directions.repo'

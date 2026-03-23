@@ -11,10 +11,19 @@ import AppInits from "@/application/AppInits";
 import { Header } from "@/widgets/Header";
 import { PageTransitionOverlay } from "@/shared/ui/PageTransitionOverlay";
 import { usePageTransition } from "@/shared/lib/page-transitions";
+import { Providers } from "@/shared/lib/providers";
+import vhMobileFix from "@/shared/lib/dom/vh-mobile-fix";
+import { calculateScrollbarWidth } from "@/shared/lib/dom";
 
 type PageTransitionPresenceProps = {
   children: ReactNode;
 };
+
+if (typeof window !== "undefined") {
+  document.documentElement.classList.add("js-ready");
+  vhMobileFix();
+  calculateScrollbarWidth();
+}
 
 const PageTransitionPresence = ({ children }: PageTransitionPresenceProps) => {
   usePageTransition();
@@ -31,9 +40,6 @@ const AnimatedPage = ({
 }) => {
   const prevBodyClass = usePrevious(pageProps.bodyClass);
   const mode = usePageTransitionStore((state) => state.mode);
-  const setIsTransitioning = usePageTransitionStore(
-    (state) => state.setIsTransitioning,
-  );
 
   return (
     <AnimatePresence
@@ -51,7 +57,6 @@ const AnimatedPage = ({
             ...pageProps.bodyClass.split(" "),
           );
         }
-        setIsTransitioning(false);
         window.scrollTo({ top: 0, behavior: "auto" });
         document.dispatchEvent(new Event("new-page-ready"));
       }}>
@@ -62,7 +67,7 @@ const AnimatedPage = ({
 
 const App = ({ Component, pageProps, router }: AppProps<CommonPageProps>) => {
   return (
-    <>
+    <Providers>
       <Preloader />
       <AppInits />
       <PageTransitionOverlay />
@@ -76,7 +81,7 @@ const App = ({ Component, pageProps, router }: AppProps<CommonPageProps>) => {
           </PageTransitionPresence>
         </AnimatedPage>
       </main>
-    </>
+    </Providers>
   );
 };
 
