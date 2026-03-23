@@ -42,7 +42,6 @@ h1,
   font-family: $font-fallback;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: -0.06em;
   line-height: 0.92;
 
   @include responsive-font-size(56px, 96px, 1280px, 1920px);

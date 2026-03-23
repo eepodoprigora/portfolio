@@ -2,8 +2,9 @@ import { mergeRefs } from "@/shared/lib/merge-refs";
 import { TextAnimation } from "@/shared/ui/TextAnimation/TextAnimation";
 import classNames from "classnames";
 import { useInView } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DirectionItem, DirectionItemRawProps } from "./DirectionItem";
+import { DirectionsNumber } from "./DirectionsNumber";
 
 export type RawProps = {
   header?: string | null;
@@ -23,10 +24,13 @@ export const Directions = ({
   ...props
 }: Props) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef);
+  const inView = useInView(rootRef, { amount: 0.2 });
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const activeNumber = directions[activeIndex]?.number ?? "01";
 
   return (
-    <div
+    <section
       {...props}
       className={classNames("directions", className)}
       ref={mergeRefs([ref, rootRef])}>
@@ -41,9 +45,23 @@ export const Directions = ({
           />
         )}
 
-        {directions &&
-          directions.map((item) => <DirectionItem key={item.id} {...item} />)}
+        <div className="directions__content">
+          <div className="directions__number-column">
+            <DirectionsNumber value={activeNumber} />
+          </div>
+
+          <div className="directions__list">
+            {directions.map((item, index) => (
+              <DirectionItem
+                key={item.id}
+                {...item}
+                index={index}
+                onActive={setActiveIndex}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

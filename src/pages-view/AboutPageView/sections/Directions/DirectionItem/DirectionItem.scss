@@ -1,13 +1,26 @@
 @use "@/application/css/utils/mixins" as *;
 @use "@/application/css/base/variables" as *;
 
+.direction {
+  min-height: vh(100);
+
+  @include tablet {
+    min-height: unset;
+  }
+}
+
 .direction__wrapper {
-  width: 65%;
-  margin-left: auto;
+  width: 85%;
   margin-right: 0;
+  margin-left: auto;
 
   @include tablet {
     width: 100%;
+  }
+
+  @include desktop-large {
+    width: 80%;
+    margin-left: 0;
   }
 }
 

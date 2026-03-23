@@ -9,3 +9,22 @@
     --p: 100px;
   }
 }
+
+.directions__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.directions__number-column {
+  width: 35%;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.directions__list {
+  @include desktop-large {
+    width: 50%;
+  }
+}
