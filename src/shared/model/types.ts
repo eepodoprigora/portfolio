@@ -14,7 +14,6 @@ export type AppBreadcrumbs = {
 
 export type CommonPageProps = AppCommonPageData & {
     bodyClass?: string;
-    cookies?: Partial<{ [key: string]: string }> | null;
     meta: PageMeta &
     Partial<{
         baseTitle: string;
