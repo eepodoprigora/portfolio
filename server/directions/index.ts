@@ -1,1 +1,1 @@
-export { getDirections } from './directions.repo'
+export { getDirections, getDirectionCategories } from './directions.repo'

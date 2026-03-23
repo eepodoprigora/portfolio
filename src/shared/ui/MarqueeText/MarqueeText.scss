@@ -9,11 +9,16 @@
   top: 50%;
   width: 100%;
   height: clamp(120px, 12vw, 220px);
-  transform: translateY(-50%);
+  transform: translate(100%, -50%);
   overflow: hidden;
   pointer-events: none;
   z-index: 2;
   mix-blend-mode: difference;
+  transition: transform $app-medium-duration ease-in-out;
+}
+
+.marquee-text--ready {
+  transform: translate(0, -50%);
 }
 
 .marquee-text__viewport {

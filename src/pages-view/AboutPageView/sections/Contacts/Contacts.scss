@@ -1,2 +1,129 @@
 @use "@/application/css/utils/mixins" as *;
 @use "@/application/css/base/variables" as *;
+
+.contacts__main {
+  display: flex;
+
+  @include tablet {
+    flex-direction: column-reverse;
+  }
+}
+
+.contacts__media {
+  position: relative;
+  width: 50%;
+  height: vh(100);
+  @include tablet {
+    width: 100%;
+    height: vh(50);
+  }
+}
+
+.contacts__content {
+  --pv: 80px;
+  padding: var(--pv) 0;
+  width: 50%;
+  @include tablet {
+    width: 100%;
+  }
+}
+
+.contacts__image-box {
+  width: 100%;
+  height: 100%;
+}
+
+.contacts__image {
+  object-fit: cover;
+}
+
+.contacts__cta {
+  --mb: 40px;
+  @include grid-columns(4);
+  margin-bottom: var(--mb);
+}
+
+.contacts__group {
+  --pv: 20px;
+  --mr: 20px;
+  padding: var(--pv) 0;
+  margin-right: var(--mr);
+  border-bottom: 1px solid rgba($light-1, 0.2);
+}
+
+.contacts__image-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.contacts__image {
+  object-fit: cover;
+}
+
+.contacts__image-liquid {
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  height: 18%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+  opacity: 1;
+  mix-blend-mode: screen;
+  filter: blur(14px);
+}
+
+.contacts__image-liquid::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 8%,
+    rgba(255, 170, 170, 0.24) 18%,
+    rgba(255, 255, 255, 0.42) 30%,
+    rgba(255, 220, 220, 0.22) 42%,
+    rgba(255, 255, 255, 0.5) 54%,
+    rgba(255, 255, 255, 0.16) 66%,
+    rgba(255, 170, 170, 0.24) 78%,
+    rgba(255, 255, 255, 0.3) 90%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 240% 100%;
+  animation: contacts-liquid-move 5s linear infinite;
+  transform: skewX(-16deg) scaleX(1.15);
+}
+
+.contacts__image-liquid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.22) 20%,
+    rgba(255, 255, 255, 0.32) 50%,
+    rgba(255, 255, 255, 0.22) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.75;
+}
+
+@keyframes contacts-liquid-move {
+  0% {
+    background-position: 0% 50%;
+    transform: translate3d(-8%, 0, 0) skewX(-16deg) scaleX(1.15);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    transform: translate3d(8%, 0, 0) skewX(-16deg) scaleX(1.15);
+  }
+
+  100% {
+    background-position: 200% 50%;
+    transform: translate3d(-8%, 0, 0) skewX(-16deg) scaleX(1.15);
+  }
+}

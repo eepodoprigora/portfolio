@@ -45,3 +45,10 @@
   color: $blue;
   opacity: 0.5;
 }
+
+.contacts__group-title {
+  --mb: 15px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  margin-bottom: var(--mb);
+}

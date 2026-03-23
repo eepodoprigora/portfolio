@@ -5,21 +5,21 @@ import { CommonPageProps } from "@/shared/model/types";
 import AboutPageView, {
   AboutPageViewRawProps,
 } from "@/pages-view/AboutPageView";
-import {
-  getDirectionCategories,
-  getDirections,
-} from "../server/directions/directions.repo";
+import { getDirectionCategories, getDirections } from "../server/directions";
+import { getContacts } from "../server/contacts";
 
 const AboutPage = ({
   heroSectionData,
   introSectionData,
   directionsSectionData,
+  contactsSectionData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <AboutPageView
       heroSectionData={heroSectionData}
       introSectionData={introSectionData}
       directionsSectionData={directionsSectionData}
+      contactsSectionData={contactsSectionData}
     />
   );
 };
@@ -29,11 +29,14 @@ export default AboutPage;
 type PageProps = CommonPageProps & AboutPageViewRawProps;
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const [commonPageProps, directions, categories] = await Promise.all([
-    getCommonPageProps(),
-    getDirections(),
-    getDirectionCategories(),
-  ]);
+  const [commonPageProps, directions, categories, contacts] = await Promise.all(
+    [
+      getCommonPageProps(),
+      getDirections(),
+      getDirectionCategories(),
+      getContacts(),
+    ],
+  );
 
   const directionsWithCategories = directions.map((direction) => ({
     ...direction,
@@ -70,6 +73,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
       directionsSectionData: {
         header: "Что я делаю",
         directions: directionsWithCategories,
+      },
+      contactsSectionData: {
+        header: "Контакты",
+        cta: "Есть идея или проект? Напишите мне",
+        social: contacts,
+        image: { src: "/static/about/about_bottom_new.jpg" },
       },
     } satisfies PageProps,
     revalidate: 60,

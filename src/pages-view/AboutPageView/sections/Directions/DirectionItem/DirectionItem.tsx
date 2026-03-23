@@ -1,5 +1,6 @@
 import { IDirection, IDirectionCategory } from "@/entities/direction/model";
 import { mergeRefs } from "@/shared/lib/merge-refs";
+import Reveal from "@/shared/ui/Reveal";
 import { TextAnimation } from "@/shared/ui/TextAnimation/TextAnimation";
 import classNames from "classnames";
 import { useInView } from "motion/react";
@@ -47,11 +48,15 @@ export const DirectionItem = ({
         />
 
         <ul className="list-unstyled direction__list">
-          {categories.map((item) => (
-            <li key={item.id} className="direction__list-item">
-              <span>{item.title}</span>{" "}
+          {categories.map((item, index) => (
+            <Reveal
+              key={item.id}
+              as="li"
+              className="direction__list-item"
+              delay={index * 80}>
+              <span>{item.title}</span>
               <span className="direction__list-count">0{item.order}</span>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>
