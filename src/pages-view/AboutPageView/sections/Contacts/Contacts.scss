@@ -35,6 +35,7 @@
 
 .contacts__image {
   object-fit: cover;
+  object-position: 50% 10%;
 }
 
 .contacts__cta {
@@ -92,8 +93,8 @@
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 240% 100%;
-  animation: contacts-liquid-move 5s linear infinite;
-  transform: skewX(-16deg) scaleX(1.15);
+  animation: contacts-liquid-move 10s linear infinite;
+  transform: skewX(-16deg) scaleX(1.2);
 }
 
 .contacts__image-liquid::after {
