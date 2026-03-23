@@ -6,17 +6,14 @@ import classNames from "classnames";
 import { useInView } from "motion/react";
 import { useEffect, useRef } from "react";
 
-export type DirectionItemRawProps = IDirection & {
+export type RawProps = IDirection & {
   categories: IDirectionCategory[];
-};
-
-type RawProps = DirectionItemRawProps & {
-  index: number;
-  onActive: (index: number) => void;
 };
 
 type Props = React.HTMLAttributes<HTMLElement> &
   RawProps & {
+    index: number;
+    onActive: (index: number) => void;
     ref?: React.RefObject<HTMLDivElement | null>;
   };
 
