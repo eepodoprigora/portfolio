@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
       bodyClass: "index-page",
       meta: {
         ...commonPageProps.meta,
-        title: "ВКИ",
+        title: "Evgenia's P Portfolio",
       },
       breadcrumbs: [],
       h1: "Evgenia's P Portfolio",
