@@ -20,14 +20,14 @@
 }
 
 .header__about {
+  display: none;
   .about-page & {
-    display: none;
+    display: block;
   }
 }
 
 .header__main {
-  display: none;
   .about-page & {
-    display: block;
+    display: none;
   }
 }

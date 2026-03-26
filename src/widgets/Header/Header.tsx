@@ -1,23 +1,32 @@
 import { useHeaderColorStore } from "@/shared/model/header-color";
+import { ILink } from "@/shared/model/types";
 import Link from "@/shared/ui/Link";
 import { RotateText } from "@/shared/ui/RotateText";
 import classNames from "classnames";
 
-export const Header = () => {
+type RawProps = {
+  links: ILink[];
+};
+
+type Props = React.HTMLAttributes<HTMLElement> & RawProps;
+
+export const Header = ({ links }: Props) => {
   const headerColor = useHeaderColorStore((s) => s.headerClass);
 
   return (
     <header className={classNames("header", headerColor)}>
       <div className="wrapper header__wrapper">
-        <Link href={"/"} className="text-xl">
-          <RotateText text="Evgenia Podoprigora" />
-        </Link>
-        <Link href={"/about"} className="text-l header__about">
-          <RotateText text="Обо мне" />
-        </Link>
-        <Link href={"/"} className="text-l header__main">
-          <RotateText text="Главная" />
-        </Link>
+        {links.map((item, i) => (
+          <Link
+            href={item.href}
+            key={i}
+            className={classNames("text-xl", {
+              header__about: item.showPage === "about",
+              header__main: item.showPage === "main",
+            })}>
+            <RotateText text={item.text} />
+          </Link>
+        ))}
       </div>
     </header>
   );

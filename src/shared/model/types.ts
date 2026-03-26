@@ -11,6 +11,12 @@ export type AppBreadcrumbs = {
     href?: string | null;
 }[];
 
+export type ILink = {
+    href: string;
+    text: string;
+    showPage?: string;
+}
+
 
 export type CommonPageProps = AppCommonPageData & {
     bodyClass?: string;
@@ -19,10 +25,10 @@ export type CommonPageProps = AppCommonPageData & {
         baseTitle: string;
     }>;
     breadcrumbs: AppBreadcrumbs;
-
-
-    overlapSticky?: boolean;
-};
+    headerData: {
+        links: ILink[]
+    };
+}
 
 export type ImageShape = {
     src: string;

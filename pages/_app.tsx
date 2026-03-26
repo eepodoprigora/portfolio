@@ -73,7 +73,7 @@ const App = ({ Component, pageProps, router }: AppProps<CommonPageProps>) => {
       <PageTransitionOverlay />
 
       <main className="main">
-        <Header />
+        <Header links={pageProps.headerData?.links ?? []} />
 
         <AnimatedPage pageProps={pageProps}>
           <PageTransitionPresence key={router.asPath}>

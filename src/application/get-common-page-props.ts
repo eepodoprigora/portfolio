@@ -10,5 +10,23 @@ export const getCommonPageProps = async (): Promise<Omit<CommonPageProps, 'bread
             description: '[APP_DESCRIPTION]',
             ogImage: '/static/images/og-image.jpg',
         },
+        headerData: {
+            links: [
+                {
+                    href: '/',
+                    text: 'Evgenia Podoprigora',
+                },
+                {
+                    href: 'about',
+                    text: 'Обо мне',
+                    showPage: 'main'
+                },
+                {
+                    href: '/',
+                    text: 'Главная',
+                    showPage: 'about'
+                },
+            ]
+        }
     };
 };
