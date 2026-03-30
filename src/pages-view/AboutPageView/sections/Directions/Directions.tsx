@@ -1,7 +1,6 @@
 import { mergeRefs } from "@/shared/lib/merge-refs";
 import { TextAnimation } from "@/shared/ui/TextAnimation/TextAnimation";
 import classNames from "classnames";
-import { useInView } from "motion/react";
 import { useRef, useState } from "react";
 import { DirectionItem, DirectionItemRawProps } from "./DirectionItem";
 import { DirectionsNumber } from "./DirectionsNumber";
@@ -24,7 +23,6 @@ export const Directions = ({
   ...props
 }: Props) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { amount: 0.2 });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const activeNumber = directions[activeIndex]?.number ?? "01";
@@ -41,7 +39,6 @@ export const Directions = ({
             split="letters"
             className="directions__header text-m section-header"
             text={header}
-            state={inView ? "enter" : "idle"}
           />
         )}
 

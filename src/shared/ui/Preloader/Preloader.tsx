@@ -6,9 +6,7 @@ export const Preloader = () => {
   const [count, setCount] = useState(0);
   const [isHidden, setIsHidden] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
-  const [lettersState, setLettersState] = useState<"idle" | "enter" | "exit">(
-    "idle",
-  );
+  const [needsExit, setNeedsExit] = useState(false);
 
   const setAppReady = useAppReadyStore((s) => s.setAppReady);
 
@@ -16,16 +14,11 @@ export const Preloader = () => {
   const toHideTiming = preloaderTiming - 500;
 
   useEffect(() => {
-    const enterTimer = setTimeout(() => {
-      setLettersState("enter");
-    }, 40);
-
     const exitTimer = setTimeout(() => {
-      setLettersState("exit");
+      setNeedsExit(true);
     }, 2000);
 
     return () => {
-      clearTimeout(enterTimer);
       clearTimeout(exitTimer);
     };
   }, []);
@@ -88,7 +81,7 @@ export const Preloader = () => {
       <TextAnimation
         as="div"
         split="letters"
-        state={lettersState}
+        needsExit={needsExit}
         stagger={0.025}
         text="EVGENIA'S P. PORTFOLIO"
         className="preloader__text h1"

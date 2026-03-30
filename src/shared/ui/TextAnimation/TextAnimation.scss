@@ -1,33 +1,56 @@
-@use "@/application/css/utils/mixins" as *;
-@use "@/application/css/base/variables" as *;
-
 .text-animation {
-  display: block;
+  --text-animation-duration: 0.4s;
+  --text-animation-delay: 0s;
+  --text-animation-stagger: 0.02s;
+  --text-animation-distance: 110%;
+  --text-animation-ease: ease;
+  --text-animation-items-count: 1;
   white-space: pre-wrap;
+
+  .text-animation-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  .text-animation-item {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(var(--text-animation-distance));
+    transition-property: opacity, transform;
+    transition-duration: var(--text-animation-duration);
+    transition-timing-function: var(--text-animation-ease);
+    transition-delay: calc(
+      var(--text-animation-delay) + var(--text-animation-index, 0) *
+        var(--text-animation-stagger)
+    );
+    will-change: transform, opacity;
+  }
+
+  &.is-in-view {
+    .text-animation-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &.is-in-view.needs-exit {
+    .text-animation-item {
+      opacity: 0;
+      transform: translateY(calc(var(--text-animation-distance) * -1));
+      transition-delay: calc(
+        var(--text-animation-delay) +
+          (
+            var(--text-animation-items-count) -
+              1 - var(--text-animation-index, 0)
+          ) *
+          var(--text-animation-stagger)
+      );
+    }
+  }
 }
 
-.text-animation-wrap {
+.text-animation-word {
   display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-}
-
-.text-animation-item {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(100%);
-  will-change: transform, opacity;
-  transition:
-    transform var(--text-animation-duration, 0.5s) $app-default-easing,
-    opacity var(--text-animation-duration, 0.5s) $app-default-easing;
-}
-
-.text-animation-state-enter .text-animation-item {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.text-animation-state-exit .text-animation-item {
-  opacity: 0;
-  transform: translateY(-100%);
+  white-space: nowrap;
 }

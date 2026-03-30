@@ -2,7 +2,6 @@ import { mergeRefs } from "@/shared/lib/merge-refs";
 import { ImageShape } from "@/shared/model/types";
 import { TextAnimation } from "@/shared/ui/TextAnimation/TextAnimation";
 import classNames from "classnames";
-import { useInView } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
 import { ContactsItem, ContactsItemRawProps } from "./ContactsItem";
@@ -37,7 +36,6 @@ export const Contacts = ({
   ...props
 }: Props) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef);
 
   return (
     <div
@@ -51,7 +49,6 @@ export const Contacts = ({
             split="letters"
             className="contacts__header text-m section-header"
             text={header}
-            state={inView ? "enter" : "idle"}
           />
         )}
 
@@ -63,7 +60,6 @@ export const Contacts = ({
                 split="words"
                 className="contacts__cta text-xl"
                 text={cta}
-                state={inView ? "enter" : "idle"}
               />
             )}
 
@@ -77,7 +73,6 @@ export const Contacts = ({
                       split="words"
                       className="contacts__group-title text-m"
                       text={group.title}
-                      state={inView ? "enter" : "idle"}
                     />
 
                     <ul className="contacts__list list-unstyled">

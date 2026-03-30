@@ -1,133 +1,207 @@
-import React, { ElementType, ReactNode, useMemo } from "react";
+import React, { ElementType, useMemo, useRef } from "react";
 import classNames from "classnames";
+import { useInView } from "motion/react";
 
-type SplitMode = "letters" | "words" | "none";
-type AnimationState = "idle" | "enter" | "exit";
+type SplitMode = "letters" | "words";
 
 type RawProps<T extends ElementType> = {
   as?: T;
-  text?: string;
-  children?: ReactNode;
+  text: string;
   split?: SplitMode;
-  state?: AnimationState;
   className?: string;
   stagger?: number;
+  delay?: number;
   duration?: number;
+  once?: boolean;
+  amount?: number;
+  needsExit?: boolean;
 };
 
 type Props<T extends ElementType> = React.HTMLAttributes<HTMLElement> &
   RawProps<T>;
 
-const splitText = (text: string, split: SplitMode) => {
-  if (split === "none") {
-    return [text];
-  }
-
-  if (split === "letters") {
-    return Array.from(text);
-  }
-
-  return text.split(/(\s+)/);
+type TextAnimationStyle = React.CSSProperties & {
+  "--text-animation-duration"?: string;
+  "--text-animation-delay"?: string;
+  "--text-animation-stagger"?: string;
+  "--text-animation-index"?: number;
+  "--text-animation-items-count"?: number;
 };
 
-const preserveSpaces = (value: string) => value.replace(/ /g, "\u00A0");
+type Item =
+  | {
+      type: "space";
+      key: string;
+      value: string;
+    }
+  | {
+      type: "word";
+      key: string;
+      value: string;
+      index: number;
+    }
+  | {
+      type: "letters";
+      key: string;
+      letters: {
+        key: string;
+        value: string;
+        index: number;
+      }[];
+    };
+
+const normalizeText = (text: string) => {
+  return text
+    .replace(/&nbsp;/g, "\u00A0")
+    .replace(/&#160;/g, "\u00A0")
+    .replace(/&#8239;/g, "\u202F");
+};
+
+const splitText = (text: string) => normalizeText(text).split(/([ \t\r\n]+)/);
+
+const createItems = (text: string, split: SplitMode): Item[] => {
+  const tokens = splitText(text);
+  let index = 0;
+
+  return tokens.reduce<Item[]>((acc, token, tokenIndex) => {
+    if (!token) {
+      return acc;
+    }
+
+    if (/^[ \t\r\n]+$/.test(token)) {
+      acc.push({
+        type: "space",
+        key: `space-${tokenIndex}`,
+        value: token,
+      });
+
+      return acc;
+    }
+
+    if (split === "words") {
+      acc.push({
+        type: "word",
+        key: `word-${tokenIndex}`,
+        value: token,
+        index,
+      });
+
+      index += 1;
+
+      return acc;
+    }
+
+    acc.push({
+      type: "letters",
+      key: `letters-${tokenIndex}`,
+      letters: Array.from(token).map((letter, letterIndex) => {
+        const item = {
+          key: `letter-${tokenIndex}-${letterIndex}`,
+          value: letter,
+          index,
+        };
+
+        index += 1;
+
+        return item;
+      }),
+    });
+
+    return acc;
+  }, []);
+};
 
 export const TextAnimation = <T extends ElementType = "div">({
   as,
   text,
-  children,
-  split = "none",
-  state = "idle",
+  split = "words",
   className,
-  stagger = 0.03,
-  duration = 0.5,
+  stagger = 0.02,
+  delay = 0,
+  duration = 0.4,
+  once = false,
+  amount = 0.4,
+  needsExit = false,
   style,
   ...props
 }: Props<T>) => {
   const Tag = (as || "div") as ElementType;
+  const ref = useRef<HTMLElement | null>(null);
+  const isInView = useInView(ref, { once, amount });
 
-  const content =
-    typeof text === "string"
-      ? text
-      : typeof children === "string"
-        ? children
-        : null;
+  const items = useMemo(() => createItems(text, split), [text, split]);
 
-  const parts = useMemo(() => {
-    if (content == null) {
-      return [];
-    }
+  const itemsCount = useMemo(() => {
+    return items.reduce((acc, item) => {
+      if (item.type === "space") {
+        return acc;
+      }
 
-    return splitText(content, split);
-  }, [content, split]);
+      if (item.type === "word") {
+        return acc + 1;
+      }
+
+      return acc + item.letters.length;
+    }, 0);
+  }, [items]);
 
   const rootClassName = classNames(
     "text-animation",
     {
-      "text-animation-split-none": split === "none",
       "text-animation-split-letters": split === "letters",
       "text-animation-split-words": split === "words",
-      "text-animation-state-idle": state === "idle",
-      "text-animation-state-enter": state === "enter",
-      "text-animation-state-exit": state === "exit",
+      "is-in-view": isInView,
+      "needs-exit": needsExit,
     },
     className,
   );
 
-  if (content == null) {
-    return (
-      <Tag {...props} className={rootClassName} style={style}>
-        {children}
-      </Tag>
-    );
-  }
-
-  if (split === "none") {
-    return (
-      <Tag
-        {...props}
-        className={rootClassName}
-        style={
-          {
-            ...style,
-            "--text-animation-duration": `${duration}s`,
-          } as React.CSSProperties
-        }>
-        {content}
-      </Tag>
-    );
-  }
+  const rootStyle: TextAnimationStyle = {
+    ...style,
+    "--text-animation-duration": `${duration}s`,
+    "--text-animation-delay": `${delay}s`,
+    "--text-animation-stagger": `${stagger}s`,
+    "--text-animation-items-count": itemsCount,
+  };
 
   return (
-    <Tag
-      {...props}
-      className={rootClassName}
-      style={
-        {
-          ...style,
-          "--text-animation-duration": `${duration}s`,
-        } as React.CSSProperties
-      }>
-      {parts.map((part, index) => {
-        if (!part) {
-          return null;
+    <Tag {...props} ref={ref} className={rootClassName} style={rootStyle}>
+      {items.map((item) => {
+        if (item.type === "space") {
+          return <React.Fragment key={item.key}>{item.value}</React.Fragment>;
         }
 
-        const isSpace = /^\s+$/.test(part);
-
-        if (isSpace) {
+        if (item.type === "word") {
           return (
-            <React.Fragment key={index}>{preserveSpaces(part)}</React.Fragment>
+            <span className="text-animation-wrap" key={item.key}>
+              <span
+                className="text-animation-item"
+                style={
+                  {
+                    "--text-animation-index": item.index,
+                  } as TextAnimationStyle
+                }>
+                {item.value}
+              </span>
+            </span>
           );
         }
 
         return (
-          <span className="text-animation-wrap" key={index}>
-            <span
-              className="text-animation-item"
-              style={{ transitionDelay: `${index * stagger}s` }}>
-              {part}
-            </span>
+          <span className="text-animation-word" key={item.key}>
+            {item.letters.map((letter) => (
+              <span className="text-animation-wrap" key={letter.key}>
+                <span
+                  className="text-animation-item"
+                  style={
+                    {
+                      "--text-animation-index": letter.index,
+                    } as TextAnimationStyle
+                  }>
+                  {letter.value}
+                </span>
+              </span>
+            ))}
           </span>
         );
       })}

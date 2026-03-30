@@ -33,8 +33,6 @@ export const DirectionItem = ({
     amount: 0.3,
   });
 
-  const isTextInView = useInView(rootRef);
-
   useEffect(() => {
     if (!isActive) {
       return;
@@ -54,7 +52,6 @@ export const DirectionItem = ({
           split="letters"
           className="direction__title h2"
           text={title}
-          state={isTextInView ? "enter" : "idle"}
         />
 
         <TextAnimation
@@ -62,7 +59,6 @@ export const DirectionItem = ({
           split="words"
           className="direction__description text-m"
           text={description}
-          state={isTextInView ? "enter" : "idle"}
         />
 
         <ul className="list-unstyled direction__list">

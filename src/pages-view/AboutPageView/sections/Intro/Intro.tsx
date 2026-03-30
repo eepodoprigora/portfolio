@@ -1,7 +1,6 @@
 import { mergeRefs } from "@/shared/lib/merge-refs";
 import { TextAnimation } from "@/shared/ui/TextAnimation/TextAnimation";
 import classNames from "classnames";
-import { useInView } from "motion/react";
 import { useRef } from "react";
 
 export type RawProps = {
@@ -24,7 +23,6 @@ export const Intro = ({
   ...props
 }: Props) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef);
 
   return (
     <div
@@ -38,7 +36,6 @@ export const Intro = ({
             split="letters"
             className="intro__header text-m section-header"
             text={header}
-            state={inView ? "enter" : "idle"}
           />
         )}
 
@@ -48,7 +45,6 @@ export const Intro = ({
             split="words"
             className="intro__main h2"
             text={textBlock1}
-            state={inView ? "enter" : "idle"}
             stagger={0.025}
           />
         )}
@@ -59,7 +55,6 @@ export const Intro = ({
             split="words"
             className="intro__add"
             text={textBlock2}
-            state={inView ? "enter" : "idle"}
             stagger={0.04}
           />
         )}
