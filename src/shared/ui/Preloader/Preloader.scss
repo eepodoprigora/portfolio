@@ -27,4 +27,8 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: var(--bottom);
+
+  @include tablet() {
+    --bottom: 10svh;
+  }
 }
