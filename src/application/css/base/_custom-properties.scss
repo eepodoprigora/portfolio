@@ -49,9 +49,8 @@
     --mobile-difference-minvh-vh: 0px;
   }
 }
-
-@supports (height: 100dvh) {
+@supports (height: 100lvh) {
   :root {
-    --mobile-vh: 1dvh;
+    --mobile-vh: 1lvh;
   }
 }
