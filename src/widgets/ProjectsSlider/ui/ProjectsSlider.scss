@@ -73,7 +73,7 @@
   backface-visibility: hidden;
 
   @include tablet {
-    top: 40%;
+    top: 45%;
   }
 }
 
@@ -87,6 +87,6 @@
   z-index: 2;
 
   @include tablet() {
-    --bottom: 10svh;
+    --bottom: 7svh;
   }
 }

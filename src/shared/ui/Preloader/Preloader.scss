@@ -29,6 +29,6 @@
   bottom: var(--bottom);
 
   @include tablet() {
-    --bottom: 10svh;
+    --bottom: 7svh;
   }
 }
