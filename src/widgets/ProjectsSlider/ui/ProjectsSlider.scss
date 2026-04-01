@@ -34,13 +34,13 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  transform: translateX(50%);
-  transition: transform 0.7s $app-default-easing;
-  transition-delay: 0.5s;
+  // transform: translateX(50%);
+  // transition: transform 0.7s $app-default-easing;
+  // transition-delay: 0.5s;
 
-  .projects-slider--ready & {
-    transform: translateX(0);
-  }
+  // .projects-slider--ready & {
+  //   transform: translateX(0);
+  // }
 }
 
 .projects-slider__webgl {
