@@ -52,7 +52,7 @@ h1,
   }
 
   @include tablet-mobile() {
-    @include responsive-font-size(30px, 44px, 360px, 768px);
+    @include responsive-font-size(24px, 44px, 360px, 768px);
     line-height: 0.95;
   }
 }
