@@ -56,7 +56,7 @@ const AppHead = ({ meta = {} }: Props) => {
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/static/favicon/favicon-16x16.png"
+        href="/static/favicon/favicon.png"
       />
       <link
         rel="apple-touch-icon"
