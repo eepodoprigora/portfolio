@@ -61,16 +61,15 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
           vertical: { src: "/static/about/hero_mob.jpg" },
           horizontal: { src: "/static/about/hero.jpg" },
         },
-        textBlock1: "// Креативный",
-        textBlock2: "разработчик интерфейсов",
+        textBlock: "// FRONTEND РАЗРАБОТЧИК",
       },
       introSectionData: {
         header: "Введение",
         textBlock1: tp(
-          "        Меня зовут Евгения, я frontend-разработчик, который превращает идеи в цельные цифровые продукты с продуманной логикой и сильной визуальной подачей.",
+          " Меня зовут Евгения. Три года я создаю интерфейсы в студиях с Awwwards — сложные анимации, продуманная архитектура, высокая планка.",
         ),
         textBlock2: tp(
-          "От анимации и взаимодействия до архитектуры и реализации — создаю цельные современные интерфейсы, удобные в развитии.",
+          "Next.js, React, TypeScript, Vanilla JS. Claude, ChatGPT, Cursor — часть моего рабочего процесса каждый день.",
         ),
       },
       directionsSectionData: {

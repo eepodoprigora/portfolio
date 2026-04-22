@@ -31,23 +31,14 @@
   position: absolute;
   bottom: 3.5rem;
   right: 4rem;
-  max-width: 22vw;
-
-  @include tablet {
-    max-width: 30vw;
-  }
 
   @include mobile {
-    max-width: 50vw;
+    right: 1rem;
   }
 }
 
 .hero__text {
-  display: flex;
-  flex-direction: column;
+  white-space: nowrap;
   mix-blend-mode: difference;
-}
-
-.hero__text-block {
   text-align: right;
 }
