@@ -7,6 +7,7 @@ import AboutPageView, {
 } from "@/pages-view/AboutPageView";
 import { getDirectionCategories, getDirections } from "../server/directions";
 import { getContacts } from "../server/contacts";
+import { tp } from "@/shared/lib/formatting";
 
 const AboutPage = ({
   heroSectionData,
@@ -65,21 +66,23 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
       },
       introSectionData: {
         header: "Введение",
-        textBlock1:
+        textBlock1: tp(
           "        Меня зовут Евгения, я frontend-разработчик, который превращает идеи в цельные цифровые продукты с продуманной логикой и сильной визуальной подачей.",
-        textBlock2:
+        ),
+        textBlock2: tp(
           "От анимации и взаимодействия до архитектуры и реализации — создаю цельные современные интерфейсы, удобные в развитии.",
+        ),
       },
       directionsSectionData: {
-        header: "Что я делаю",
+        header: tp("Что я делаю"),
         directions: directionsWithCategories,
       },
       contactsSectionData: {
         header: "Контакты",
-        cta: "Есть идея или проект? Напишите мне",
+        cta: tp("Есть идея или проект? Напишите мне"),
         social: contacts,
         image: { src: "/static/about/about_bottom_new.jpg" },
-        rights: "© 2026 Evgenia Podoprigora. Все права защищены.",
+        rights: tp("© 2026 Evgenia Podoprigora. Все права защищены."),
       },
     } satisfies PageProps,
     revalidate: 60,

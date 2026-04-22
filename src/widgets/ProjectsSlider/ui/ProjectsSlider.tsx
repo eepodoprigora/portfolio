@@ -86,6 +86,7 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
               {...project}
               setSlideRef={setSlideRef(index)}
               setMediaRef={setMediaRef(index)}
+              active={index === currentIndex}
             />
           ))}
         </div>

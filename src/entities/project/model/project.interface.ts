@@ -5,4 +5,7 @@ export interface IProject {
     name: string;
     previewImg: ImageShape;
     href: string;
+
+    category: string;
+    summary: string;
 }

@@ -5,7 +5,7 @@
   --slide-width: 22vw;
   --slide-padding: 2vw;
   --gap: 0;
-  --ratio: 350 / 500;
+  --ratio: 300 / 400;
 
   width: 100vw;
   height: vh(100);
@@ -79,12 +79,17 @@
 
 .projects-slider__counter {
   --bottom: 3.5rem;
+  --p: 10px;
+  z-index: 11;
 
   position: absolute;
   bottom: var(--bottom);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
+  backdrop-filter: blur(10px);
+  padding: var(--p);
+
+  background-color: rgba($black, 0.5);
 
   @include tablet() {
     --bottom: 7svh;

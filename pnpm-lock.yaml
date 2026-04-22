@@ -32,6 +32,9 @@ importers:
       three:
         specifier: ^0.182.0
         version: 0.182.0
+      typograf:
+        specifier: ^7.7.0
+        version: 7.7.0
       usehooks-ts:
         specifier: ^3.1.1
         version: 3.1.1(react@19.2.3)
@@ -2256,6 +2259,10 @@ packages:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  typograf@7.7.0:
+    resolution: {integrity: sha512-VaUj5T5KjAeXVsGdSJsaKaxiPq/dC1WB+xo+Y0aclUQ+omBQvCejqCk3t5QEY8n0OnTRYvUiPd2/rod1KAQzxA==}
+    engines: {node: '>= 4'}
 
   uglify-js@3.19.3:
     resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
@@ -4924,6 +4931,8 @@ snapshots:
       - supports-color
 
   typescript@5.9.3: {}
+
+  typograf@7.7.0: {}
 
   uglify-js@3.19.3:
     optional: true
