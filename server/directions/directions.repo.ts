@@ -28,46 +28,49 @@ export const getDirections = async (): Promise<IDirection[]> => {
 
 export const getDirectionCategories = async (): Promise<IDirectionCategory[]> => {
     return [
+        // 01 — Интерфейсы и анимация
         {
             id: "animations-microinteractions",
             directionId: "interfaces-animation",
-            title: "Анимации и микровзаимодействия",
+            title: "Сложные анимации и микровзаимодействия",
             order: 1,
         },
         {
             id: "promo-pages",
             directionId: "interfaces-animation",
-            title: "Промо-страницы",
+            title: "Иммерсивные промо-сайты",
             order: 2,
         },
         {
             id: "landing-pages",
             directionId: "interfaces-animation",
-            title: "Лендинги",
+            title: "Лендинги и промо-лендинги",
             order: 3,
         },
         {
             id: "adaptive-layout",
             directionId: "interfaces-animation",
-            title: "Адаптивная вёрстка",
+            title: "Pixel-perfect адаптивная вёрстка",
             order: 4,
         },
         {
             id: "interactive-sections",
             directionId: "interfaces-animation",
-            title: "Интерактивные секции",
+            title: "Интерактивные и scroll-секции",
             order: 5,
         },
+
+        // 02 — Продуктовая разработка
         {
             id: "sites-and-interfaces",
             directionId: "product-development",
-            title: "Сайты и интерфейсы на React, Next.js и нативном JavaScript",
+            title: "React, Next.js, TypeScript, Vanilla JS",
             order: 1,
         },
         {
             id: "catalogs-complex-pages",
             directionId: "product-development",
-            title: "Каталоги и сложные страницы",
+            title: "Каталоги с фильтрами и сложной логикой",
             order: 2,
         },
         {
@@ -85,37 +88,39 @@ export const getDirectionCategories = async (): Promise<IDirectionCategory[]> =>
         {
             id: "personal-accounts",
             directionId: "product-development",
-            title: "Личные кабинеты",
+            title: "Личные кабинеты и брокерские интерфейсы",
             order: 5,
+        },
+
+        // 03 — AI-assisted разработка
+        {
+            id: "claude",
+            directionId: "architecture-development",
+            title: "Claude",
+            order: 1,
+        },
+        {
+            id: "chatgpt",
+            directionId: "architecture-development",
+            title: "ChatGPT",
+            order: 2,
+        },
+        {
+            id: "cursor",
+            directionId: "architecture-development",
+            title: "Cursor",
+            order: 3,
         },
         {
             id: "component-architecture",
             directionId: "architecture-development",
             title: "Компонентная архитектура",
-            order: 1,
-        },
-        {
-            id: "typescript",
-            directionId: "architecture-development",
-            title: "TypeScript",
-            order: 2,
-        },
-        {
-            id: "state-management",
-            directionId: "architecture-development",
-            title: "Управление состоянием",
-            order: 3,
-        },
-        {
-            id: "refactoring",
-            directionId: "architecture-development",
-            title: "Рефакторинг",
             order: 4,
         },
         {
             id: "optimization-support",
             directionId: "architecture-development",
-            title: "Оптимизация и поддержка",
+            title: "Оптимизация и рефакторинг",
             order: 5,
         },
     ];
