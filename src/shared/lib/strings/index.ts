@@ -5,3 +5,5 @@ export const clampMax = (v: number, min: number, max: number) => Math.max(min, M
 
 export const clampMin = (value: number, min: number, max: number) =>
     Math.min(Math.max(value, min), max);
+
+export const normalizeHref = (href: string) => href.replace(/\/{2,}/g, "/");

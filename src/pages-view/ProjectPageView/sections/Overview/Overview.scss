@@ -1,0 +1,144 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.overview {
+  --mb: 120px;
+  @include grid-offset(padding-right, 2);
+  @include grid-offset(padding-left, 2);
+  margin-bottom: var(--mb);
+
+  @include tablet {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.overview__wrapper {
+  display: flex;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.overview__media {
+  --h: 600px;
+  position: relative;
+  height: var(--h);
+  @include grid-columns(7);
+  flex-shrink: 0;
+
+  @include desktop-large {
+    --h: 800px;
+  }
+
+  @include tablet {
+    @include grid-columns(3);
+    --h: 500px;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.overview__content {
+  @include grid-offset(margin-left, 2);
+  @include grid-columns(8);
+
+  @include tablet {
+    @include grid-offset(margin-left, 1);
+    width: 100%;
+  }
+
+  @include mobile {
+    --pt: 40px;
+    margin-left: 0;
+    padding-top: var(--pt);
+  }
+}
+
+.overview__header {
+  --mb: 40px;
+  margin-bottom: var(--mb);
+  @include grid-offset(margin-left, -1);
+
+  @include tablet {
+    margin-left: 0;
+  }
+}
+
+.overview__section {
+  --mb: 30px;
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: var(--mb);
+  }
+}
+
+.overview__section-item {
+  --mb: 8px;
+  --pl: 15px;
+  position: relative;
+  padding-left: var(--pl);
+
+  &:before {
+    --size: 5px;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    border-radius: 50%;
+    background-color: $light-1;
+    width: var(--size);
+    height: var(--size);
+  }
+  &:not(:last-child) {
+    margin-bottom: var(--mb);
+  }
+}
+
+.overview__section-title {
+  @include grid-columns(2);
+  flex-shrink: 0;
+  opacity: 0.7;
+
+  @include tablet {
+    @include grid-columns(1.5);
+  }
+}
+
+.overview__summary {
+  --mb: 40px;
+  margin-bottom: var(--mb);
+}
+
+.overview__tags {
+  --mb: 40px;
+  --gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--mb);
+  gap: var(--gap);
+}
+
+.overview__tag {
+  --pv: 8px;
+  --ph: 15px;
+  --br: 20px;
+  padding: var(--pv) var(--ph);
+  opacity: 0.6;
+  border: 1px solid $light-1;
+  border-radius: var(--br);
+
+  @include tablet {
+    --pv: 5px;
+    --ph: 10px;
+  }
+}
+
+.overview__sections {
+  --mb: 40px;
+  margin-bottom: var(--mb);
+}

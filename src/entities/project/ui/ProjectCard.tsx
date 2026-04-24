@@ -1,6 +1,7 @@
 import Image from "next/image";
 import classNames from "classnames";
 import { IProject } from "../model";
+import Link from "@/shared/ui/Link";
 
 type RawProps = IProject &
   React.HTMLAttributes<HTMLElement> & {
@@ -10,7 +11,7 @@ type RawProps = IProject &
   };
 
 export const ProjectCard = ({
-  href,
+  id,
   setSlideRef,
   setMediaRef,
   name,
@@ -48,13 +49,7 @@ export const ProjectCard = ({
         </div>
       </div>
 
-      <a
-        className="project-card__link"
-        href={href}
-        aria-label={name}
-        target="_blank"
-        rel="noreferrer"
-      />
+      <Link className="project-card__link" href={`/projects/${id}/`} />
     </article>
   );
 };

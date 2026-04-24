@@ -1,2 +1,2 @@
 
-export type { IProject } from './project.interface';
+export type { IProject, IProjectDetail, ProjectSectionType, ProjectSectionId, ProjectDetailSection, IProjectDetailView } from './project.interface';

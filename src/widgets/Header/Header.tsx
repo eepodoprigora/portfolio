@@ -1,3 +1,4 @@
+import { normalizeHref } from "@/shared/lib/strings";
 import { useHeaderColorStore } from "@/shared/model/header-color";
 import { ILink } from "@/shared/model/types";
 import Link from "@/shared/ui/Link";
@@ -16,17 +17,21 @@ export const Header = ({ links }: Props) => {
   return (
     <header className={classNames("header", headerColor)}>
       <div className="wrapper header__wrapper">
-        {links.map((item, i) => (
-          <Link
-            href={item.href}
-            key={i}
-            className={classNames("text-xl", {
-              header__about: item.showPage === "about",
-              header__main: item.showPage === "main",
-            })}>
-            <RotateText text={item.text} />
-          </Link>
-        ))}
+        {links.map((item, i) => {
+          const safeHref = normalizeHref(item.href);
+
+          return (
+            <Link
+              href={safeHref}
+              key={i}
+              className={classNames("text-xl", {
+                header__about: item.showPage === "about",
+                header__main: item.showPage === "main",
+              })}>
+              <RotateText text={item.text} />
+            </Link>
+          );
+        })}
       </div>
     </header>
   );

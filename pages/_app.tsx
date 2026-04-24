@@ -15,6 +15,7 @@ import { Providers } from "@/shared/lib/providers";
 import vhMobileFix from "@/shared/lib/dom/vh-mobile-fix";
 import { calculateScrollbarWidth } from "@/shared/lib/dom";
 import AppHead from "@/AppHead";
+import LayoutGrid from "@/shared/ui/LayoutGrid";
 
 type PageTransitionPresenceProps = {
   children: ReactNode;
@@ -83,6 +84,7 @@ const App = ({ Component, pageProps, router }: AppProps<CommonPageProps>) => {
           </PageTransitionPresence>
         </AnimatedPage>
       </main>
+      {process.env.NODE_ENV === "development" && <LayoutGrid />}
     </Providers>
   );
 };

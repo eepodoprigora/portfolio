@@ -1,0 +1,6 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.project__content {
+  padding-top: calc(var(--header-height) * 2);
+}

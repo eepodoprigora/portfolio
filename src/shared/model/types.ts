@@ -46,5 +46,10 @@ export type OrientationImageShape = {
 
 
 
-
+export type VideoShape = {
+    type: string;
+    src: string;
+    media?: string;
+    previewImg?: ImageShape | null;
+}[];
 

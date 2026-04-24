@@ -1,0 +1,33 @@
+.parallaxed {
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  height: 100%;
+
+  &.responsive__item {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.parallaxed-item {
+  will-change: transform;
+  width: inherit;
+  height: inherit;
+
+  @supports (animation-timeline: view()) {
+    will-change: auto;
+  }
+}
+
+.parallaxed-item__wrapper {
+  height: 100%;
+}
+
+.parallaxed-item--js {
+  .parallaxed-item__wrapper {
+    position: relative;
+    width: calc(100% * var(--scale));
+    height: calc(100% * var(--scale));
+  }
+}

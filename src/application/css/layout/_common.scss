@@ -143,3 +143,7 @@ canvas {
     contain-intrinsic-height: auto 100vh;
   }
 }
+
+.image {
+  object-fit: cover;
+}

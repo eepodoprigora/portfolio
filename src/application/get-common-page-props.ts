@@ -17,7 +17,7 @@ export const getCommonPageProps = async (): Promise<Omit<CommonPageProps, 'bread
                     text: 'Evgenia Podoprigora',
                 },
                 {
-                    href: 'about',
+                    href: '/about',
                     text: 'Обо мне',
                     showPage: 'main'
                 },

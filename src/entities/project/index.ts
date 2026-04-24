@@ -1,2 +1,2 @@
-export type { IProject } from './model';
+export type { IProject, IProjectDetail, ProjectDetailSection, IProjectDetailView } from './model';
 export { ProjectCard } from './ui'
