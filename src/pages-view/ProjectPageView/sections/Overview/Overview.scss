@@ -33,7 +33,7 @@
   }
 
   @include tablet {
-    @include grid-columns(3);
+    @include grid-columns(4);
     --h: 500px;
   }
 

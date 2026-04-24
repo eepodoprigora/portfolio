@@ -4,3 +4,54 @@
 .project__content {
   padding-top: calc(var(--header-height) * 2);
 }
+
+.project__to-top {
+  --b: 3.5rem;
+  --br: 20px;
+  --w: 40px;
+  --h: 50px;
+
+  position: sticky;
+  bottom: var(--b);
+  left: var(--offset-x);
+  transform: translateY(calc(var(--b) * 2));
+  border-radius: var(--br);
+  width: var(--w);
+  height: var(--h);
+  border: 1px solid $light-1;
+  transition:
+    transform $app-medium-duration $app-default-easing,
+    background-color $app-default-duration $app-default-easing;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include tablet() {
+    --b: 7svh;
+  }
+
+  &.project__to-top--visible {
+    transform: translateY(0);
+  }
+
+  @include hover {
+    background-color: $light-1;
+
+    .project__to-top-icon {
+      background-color: $black;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.project__to-top-icon {
+  width: 50%;
+  height: 50%;
+  mask-image: url("/static/icons/arrow-top.svg");
+  background-color: $light-1;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition:
+    transform $app-medium-duration $app-default-easing,
+    background-color $app-default-duration $app-default-easing;
+}
