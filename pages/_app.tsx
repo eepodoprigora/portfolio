@@ -14,7 +14,7 @@ import { usePageTransition } from "@/shared/lib/page-transitions";
 import { Providers } from "@/shared/lib/providers";
 import vhMobileFix from "@/shared/lib/dom/vh-mobile-fix";
 import { calculateScrollbarWidth } from "@/shared/lib/dom";
-import AppHead from "@/AppHead";
+import AppHead from "@/application/AppHead";
 import LayoutGrid from "@/shared/ui/LayoutGrid";
 
 type PageTransitionPresenceProps = {
