@@ -16,6 +16,7 @@ import vhMobileFix from "@/shared/lib/dom/vh-mobile-fix";
 import { calculateScrollbarWidth } from "@/shared/lib/dom";
 import AppHead from "@/application/AppHead";
 import LayoutGrid from "@/shared/ui/LayoutGrid";
+import { taskScheduler } from "@/shared/lib/scheduler";
 
 type PageTransitionPresenceProps = {
   children: ReactNode;
@@ -24,7 +25,13 @@ type PageTransitionPresenceProps = {
 if (typeof window !== "undefined") {
   document.documentElement.classList.add("js-ready");
   vhMobileFix();
-  calculateScrollbarWidth();
+
+  taskScheduler.schedule(
+    () => {
+      calculateScrollbarWidth();
+    },
+    { priority: "user-visible" },
+  );
 }
 
 const PageTransitionPresence = ({ children }: PageTransitionPresenceProps) => {

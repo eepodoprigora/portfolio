@@ -11,6 +11,7 @@ import {
 } from "./sections";
 import { useHeaderColorObserver } from "@/shared/lib/use-header-color";
 import { DEFAULT_HEADER_CLASS, DARK_HEADER_CLASS } from "@/shared/сonfig/const";
+import DefaultLayout from "@/shared/ui/DefaultLayout";
 
 export type RawProps = {
   heroSectionData: HeroRawProps;
@@ -35,31 +36,33 @@ const AboutPageView = ({
   useHeaderColorObserver(sectionRefs, DEFAULT_HEADER_CLASS);
 
   return (
-    <div className="about">
-      <Hero
-        ref={heroRef}
-        {...heroSectionData}
-        data-header-class={DARK_HEADER_CLASS}
-      />
+    <DefaultLayout>
+      <div className="about">
+        <Hero
+          ref={heroRef}
+          {...heroSectionData}
+          data-header-class={DARK_HEADER_CLASS}
+        />
 
-      <Intro
-        ref={introRef}
-        {...introSectionData}
-        data-header-class={DEFAULT_HEADER_CLASS}
-      />
+        <Intro
+          ref={introRef}
+          {...introSectionData}
+          data-header-class={DEFAULT_HEADER_CLASS}
+        />
 
-      <Directions
-        ref={directionsRef}
-        {...directionsSectionData}
-        data-header-class={DEFAULT_HEADER_CLASS}
-      />
+        <Directions
+          ref={directionsRef}
+          {...directionsSectionData}
+          data-header-class={DEFAULT_HEADER_CLASS}
+        />
 
-      <Contacts
-        ref={contactsRef}
-        {...contactsSectionData}
-        data-header-class={DEFAULT_HEADER_CLASS}
-      />
-    </div>
+        <Contacts
+          ref={contactsRef}
+          {...contactsSectionData}
+          data-header-class={DEFAULT_HEADER_CLASS}
+        />
+      </div>
+    </DefaultLayout>
   );
 };
 

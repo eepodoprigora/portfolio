@@ -1,0 +1,229 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.error {
+  --mb: 30px;
+  padding: var(--header-height) 0;
+  height: vh(100);
+  overflow: clip;
+}
+
+.error__wrapper {
+  height: 100%;
+  @include flex-center();
+  flex-direction: column;
+}
+
+.error__title {
+  margin-bottom: var(--mb);
+  color: rgba($light-1, 0.78);
+}
+
+.error__number {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--mb);
+
+  font-size: clamp(7rem, 18vw, 15rem);
+  color: $light-1;
+  letter-spacing: -0.06em;
+
+  &::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: #ff3060;
+    mix-blend-mode: screen;
+    animation: error-glitch-chr-r 3.4s infinite;
+  }
+
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: #00e5ff;
+    mix-blend-mode: screen;
+    animation: error-glitch-chr-b 3.4s infinite;
+  }
+}
+
+.error__number-slice {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.error__number-slice-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  font-size: clamp(7rem, 18vw, 15rem);
+  font-weight: inherit;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  color: $light-1;
+  animation: error-glitch-slice 3.4s infinite;
+
+  &--a {
+    clip-path: inset(18% 0 62% 0);
+  }
+  &--b {
+    clip-path: inset(55% 0 22% 0);
+  }
+  &--c {
+    clip-path: inset(72% 0 8% 0);
+  }
+}
+
+// Хром красный
+@keyframes error-glitch-chr-r {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  31% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  31.5% {
+    transform: translate(-3px, 0);
+    opacity: 0.55;
+    clip-path: inset(10% 0 50% 0);
+  }
+  32% {
+    transform: translate(2px, -1px);
+    opacity: 0.45;
+    clip-path: inset(0 0 0 0);
+  }
+  32.8% {
+    transform: translate(-4px, 1px);
+    opacity: 0.6;
+    clip-path: inset(60% 0 15% 0);
+  }
+  33.5% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  67% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  67.4% {
+    transform: translate(3px, 0);
+    opacity: 0.5;
+    clip-path: inset(30% 0 40% 0);
+  }
+  68% {
+    transform: translate(-2px, 1px);
+    opacity: 0.4;
+    clip-path: inset(0 0 0 0);
+  }
+  68.6% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+
+// Хром синий
+@keyframes error-glitch-chr-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  31% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  31.5% {
+    transform: translate(3px, 0);
+    opacity: 0.55;
+    clip-path: inset(10% 0 50% 0);
+  }
+  32% {
+    transform: translate(-2px, 1px);
+    opacity: 0.45;
+    clip-path: inset(0 0 0 0);
+  }
+  32.8% {
+    transform: translate(4px, -1px);
+    opacity: 0.6;
+    clip-path: inset(60% 0 15% 0);
+  }
+  33.5% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  67% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  67.4% {
+    transform: translate(-3px, 0);
+    opacity: 0.5;
+    clip-path: inset(30% 0 40% 0);
+  }
+  68% {
+    transform: translate(2px, -1px);
+    opacity: 0.4;
+    clip-path: inset(0 0 0 0);
+  }
+  68.6% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+
+// Слайсинг
+@keyframes error-glitch-slice {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  31% {
+    opacity: 0;
+  }
+  31.5% {
+    transform: translateX(-8px);
+    opacity: 1;
+  }
+  32.3% {
+    transform: translateX(12px);
+    opacity: 1;
+  }
+  33% {
+    transform: translateX(-3px);
+    opacity: 1;
+  }
+  33.5% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  67% {
+    opacity: 0;
+  }
+  67.4% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+  67.9% {
+    transform: translateX(-6px);
+    opacity: 1;
+  }
+  68.5% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}

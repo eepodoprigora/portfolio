@@ -8,8 +8,11 @@ import { CommonPageProps } from "@/shared/model/types";
 const NotFoundPage = ({
   errorNumber,
   title,
+  btnText,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <ErrorPageView errorNumber={errorNumber} title={title} />;
+  return (
+    <ErrorPageView errorNumber={errorNumber} title={title} btnText={btnText} />
+  );
 };
 
 export default NotFoundPage;
@@ -31,6 +34,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({}) => {
       bodyClass: "error-page",
 
       errorNumber: 404,
+      btnText: "На главную",
     } satisfies PageProps,
     revalidate: 120,
   };

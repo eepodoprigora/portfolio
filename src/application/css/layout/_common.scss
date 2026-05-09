@@ -27,6 +27,10 @@ html {
     @include tablet {
       padding-right: calc(var(--actual-scrollbar-width, 0px));
     }
+
+    &.error-page {
+      padding-right: var(--actual-scrollbar-width, 0px);
+    }
   }
 }
 

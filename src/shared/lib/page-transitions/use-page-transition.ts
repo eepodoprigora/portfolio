@@ -26,6 +26,12 @@ export const usePageTransition = () => {
     const hasHandledEnterRef = useRef(false);
 
     useEffect(() => {
+        if (isPresent && sharedLeavePromise) {
+            sharedLeavePromise = null;
+        }
+    }, [isPresent]);
+
+    useEffect(() => {
         if (isPresent || hasStartedExitRef.current) {
             return;
         }
@@ -33,6 +39,7 @@ export const usePageTransition = () => {
         hasStartedExitRef.current = true;
 
         const isOwner = !sharedLeavePromise;
+
 
         if (isOwner) {
             setIsLeaving(true);
