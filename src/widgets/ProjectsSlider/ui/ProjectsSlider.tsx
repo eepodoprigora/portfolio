@@ -42,7 +42,6 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
     mediaRefs,
     imageUrls,
     progressPx: progress,
-    enabled: appReady,
   });
 
   const setSlideRef = (index: number) => (node: HTMLElement | null) => {

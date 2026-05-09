@@ -163,17 +163,6 @@ export const useThreeProjectsOverlay = ({
         needsResizeRef.current = true;
         dirtyRef.current = true;
 
-        // FIX: форсируем правильный layout после того как DOM устоялся
-        const initTimer = setTimeout(() => {
-            setSize();
-            syncRects();
-            dirtyRef.current = true;
-        }, 100);
-
-        // FIX: первые N кадров рендерим unconditionally — перекрывает
-        // race conditions между инициализацией Three.js и готовностью DOM
-        let bootFrames = 30;
-
         const tick = () => {
             if (needsResizeRef.current) {
                 needsResizeRef.current = false;
@@ -198,10 +187,9 @@ export const useThreeProjectsOverlay = ({
 
             const moving = Math.abs(target - next) > 0.25;
 
-            if (dirtyRef.current || moving || bootFrames > 0) {
+            if (dirtyRef.current || moving) {
                 syncRects();
                 dirtyRef.current = false;
-                if (bootFrames > 0) bootFrames--;
             }
 
             renderer.render(scene, camera);
@@ -211,8 +199,6 @@ export const useThreeProjectsOverlay = ({
         rafRef.current = requestAnimationFrame(tick);
 
         return () => {
-            clearTimeout(initTimer);
-
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
             ro.disconnect();
