@@ -1,0 +1,1 @@
+export { default, type RawProps as ErrorPageViewRawProps } from './ErrorPageView'

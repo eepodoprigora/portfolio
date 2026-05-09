@@ -20,6 +20,14 @@
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 
+  transform: translateX(70%);
+  transition: transform 0.7s $app-default-easing;
+  transition-delay: 0.2s;
+
+  &.projects-slider--ready {
+    transform: translateX(0);
+  }
+
   @include desktop-large {
     --slide-width: 20vw;
   }
@@ -34,9 +42,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  // transform: translateX(50%);
-  // transition: transform 0.7s $app-default-easing;
-  // transition-delay: 0.5s;
 
   // .projects-slider--ready & {
   //   transform: translateX(0);
