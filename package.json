@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "classnames": "^2.5.1",
     "isomorphic-dompurify": "^3.3.0",
     "lodash.debounce": "^4.0.8",

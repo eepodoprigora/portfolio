@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { DocumentProps, Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 function Document({ __NEXT_DATA__ }: DocumentProps) {
   const { bodyClass } = __NEXT_DATA__.props.pageProps;
@@ -25,6 +26,7 @@ function Document({ __NEXT_DATA__ }: DocumentProps) {
         </Script>
         <Main />
         <NextScript />
+        <Analytics />
       </body>
     </Html>
   );
