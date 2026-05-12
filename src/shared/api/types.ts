@@ -1,4 +1,4 @@
-import { AppLocale } from '@/shared/сonfig/i18n';
+import { AppLocale } from "@/shared/сonfig/const";
 // import { createApiResponseSchema } from './utils';
 
 export type ApiRequestParams<T extends Record<string, unknown> = {}> = {

@@ -4,9 +4,8 @@ import ErrorPageView, {
   ErrorPageViewRawProps,
 } from "@/pages-view/ErrorPageView";
 import { CommonPageProps } from "@/shared/model/types";
-import { AppLocale } from "@/shared/сonfig/const";
 
-const NotFoundPage = ({
+const ServerErrorPage = ({
   errorNumber,
   title,
   btnText,
@@ -16,13 +15,12 @@ const NotFoundPage = ({
   );
 };
 
-export default NotFoundPage;
+export default ServerErrorPage;
 
 type PageProps = CommonPageProps & ErrorPageViewRawProps;
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({ locale }) => {
-  const commonPageProps = await getCommonPageProps(locale as AppLocale);
-
+  const commonPageProps = await getCommonPageProps(locale as "ru" | "en");
   const isEn = locale === "en";
 
   return {
@@ -30,15 +28,13 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ locale }) => {
       ...commonPageProps,
       meta: {
         ...commonPageProps.meta,
-        title: isEn ? "Page not found" : "Страница не найдена",
+        title: isEn ? "Server error" : "Ошибка сервера",
       },
-      title: isEn ? "Page not found" : "Страница не найдена",
+      title: isEn ? "Something went wrong" : "Что-то пошло не так",
       breadcrumbs: [],
       bodyClass: "error-page",
-
-      errorNumber: 404,
+      errorNumber: 500,
       btnText: isEn ? "Home" : "На главную",
     } satisfies PageProps,
-    revalidate: 120,
   };
 };

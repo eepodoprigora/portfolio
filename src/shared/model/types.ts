@@ -28,6 +28,9 @@ export type CommonPageProps = AppCommonPageData & {
     headerData: {
         links: ILink[]
     };
+    footerData: {
+        policy: ILink;
+    }
 }
 
 export type ImageShape = {

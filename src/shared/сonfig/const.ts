@@ -1,4 +1,5 @@
-export type AppLocale = 'ru';
+export type AppLocale = 'ru' | 'en';
+;
 export const DEFAULT_LOCALE = 'ru'
 export const NO_SCROLL_CLASS = 'no-scroll'
 

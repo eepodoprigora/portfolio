@@ -1,22 +1,28 @@
 import { ImageShape, VideoShape } from "@/shared/model/types";
 
-export interface IProject {
-    id: string;
+export interface IProjectLocale {
     name: string;
-    previewImg: ImageShape;
-    href: string;
-    category: string;
     summary: string;
-
 }
 
-export interface IProjectDetail extends IProject {
+export interface IProject {
+    id: string;
+    href: string;
+    previewImg: ImageShape;
+    category: string;
+
+    ru: IProjectLocale;
+    en: IProjectLocale;
+}
+
+export type IProjectFlat = Omit<IProject, 'ru' | 'en'> & IProjectLocale;
+
+export interface IProjectDetail extends IProjectFlat {
     video?: VideoShape;
     images?: ImageShape[];
     sections: {
         complexity: string;
         result: string[];
-
     };
     tags?: string[];
 }

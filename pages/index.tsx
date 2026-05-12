@@ -6,6 +6,7 @@ import IndexPageView, {
 } from "@/pages-view/IndexPageView";
 import { CommonPageProps } from "@/shared/model/types";
 import { getProjects } from "../server/projects";
+import { AppLocale } from "@/shared/сonfig/const";
 
 const IndexPage = ({
   h1,
@@ -22,10 +23,10 @@ export default IndexPage;
 
 type PageProps = CommonPageProps & IndexPageViewRawProps;
 
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
+export const getStaticProps: GetStaticProps<PageProps> = async ({ locale }) => {
   const [commonPageProps, projects] = await Promise.all([
-    getCommonPageProps(),
-    getProjects(),
+    getCommonPageProps(locale as AppLocale),
+    getProjects(locale as AppLocale),
   ]);
 
   return {
@@ -34,11 +35,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
       bodyClass: "index-page",
       meta: {
         ...commonPageProps.meta,
-        title: "Evgenia's P Portfolio",
+        title: locale === "en" ? "Evgenia's Portfolio" : "Портфолио Евгении",
       },
       breadcrumbs: [],
-      h1: "Evgenia's P Portfolio",
-      projects: projects,
+      h1: locale === "en" ? "Evgenia's Portfolio" : "Портфолио Евгении",
+      projects,
     } satisfies PageProps,
     revalidate: 60,
   };

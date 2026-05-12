@@ -1,8 +1,8 @@
-import { IProject } from "@/entities/project";
+import { IProjectFlat } from "@/entities/project";
 import DefaultLayout from "@/shared/ui/DefaultLayout";
 import { ProjectsSlider } from "@/widgets/ProjectsSlider";
 
-export type RawProps = { h1: string; projects: IProject[] };
+export type RawProps = { h1: string; projects: IProjectFlat[] };
 
 const IndexPageView = ({ h1, projects }: RawProps) => {
   return (

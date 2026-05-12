@@ -8,6 +8,7 @@ import AboutPageView, {
 import { getDirectionCategories, getDirections } from "../server/directions";
 import { getContacts } from "../server/contacts";
 import { tp } from "@/shared/lib/formatting";
+import { AppLocale } from "@/shared/сonfig/const";
 
 const AboutPage = ({
   heroSectionData,
@@ -29,13 +30,13 @@ export default AboutPage;
 
 type PageProps = CommonPageProps & AboutPageViewRawProps;
 
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
+export const getStaticProps: GetStaticProps<PageProps> = async ({ locale }) => {
   const [commonPageProps, directions, categories, contacts] = await Promise.all(
     [
-      getCommonPageProps(),
-      getDirections(),
-      getDirectionCategories(),
-      getContacts(),
+      getCommonPageProps(locale as AppLocale),
+      getDirections(locale as AppLocale),
+      getDirectionCategories(locale as AppLocale),
+      getContacts(locale as AppLocale),
     ],
   );
 
@@ -46,13 +47,15 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
       .sort((a, b) => a.order - b.order),
   }));
 
+  const isEn = locale === "en";
+
   return {
     props: {
       ...commonPageProps,
       bodyClass: "about-page",
       meta: {
         ...commonPageProps.meta,
-        title: "Evgenia's P About",
+        title: isEn ? "Evgenia's Portfolio — About" : "Евгения — Обо мне",
       },
       breadcrumbs: [],
       heroSectionData: {
@@ -61,27 +64,39 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
           vertical: { src: "/static/about/hero_mob.jpg" },
           horizontal: { src: "/static/about/hero.jpg" },
         },
-        textBlock: "// FRONTEND РАЗРАБОТЧИК",
+        textBlock: isEn ? "// FRONTEND DEVELOPER" : "// FRONTEND РАЗРАБОТЧИК",
       },
       introSectionData: {
-        header: "Введение",
+        header: isEn ? "Introduction" : "Введение",
         textBlock1: tp(
-          " Меня зовут Евгения. Три года я создаю интерфейсы в студиях с Awwwards — сложные анимации, продуманная архитектура, высокая планка.",
+          isEn
+            ? "My name is Evgenia. For three years I've been building interfaces at Awwwards-winning studios — complex animations, solid architecture, high standards."
+            : "Меня зовут Евгения. Три года я создаю интерфейсы в студиях с Awwwards — сложные анимации, продуманная архитектура, высокая планка.",
         ),
         textBlock2: tp(
-          "Next.js, React, TypeScript, Vanilla JS. Claude, ChatGPT, Cursor — часть моего рабочего процесса каждый день.",
+          isEn
+            ? "Next.js, React, TypeScript, Vanilla JS. Claude, ChatGPT, Cursor — part of my workflow every day."
+            : "Next.js, React, TypeScript, Vanilla JS. Claude, ChatGPT, Cursor — часть моего рабочего процесса каждый день.",
         ),
       },
       directionsSectionData: {
-        header: tp("Что я делаю"),
+        header: tp(isEn ? "What I do" : "Что я делаю"),
         directions: directionsWithCategories,
       },
       contactsSectionData: {
-        header: "Контакты",
-        cta: tp("Есть идея или проект? Напишите мне"),
+        header: isEn ? "Contacts" : "Контакты",
+        cta: tp(
+          isEn
+            ? "Have an idea or project? Write to me"
+            : "Есть идея или проект? Напишите мне",
+        ),
         social: contacts,
         image: { src: "/static/about/about_bottom_new.jpg" },
-        rights: tp("© 2026 Evgenia Podoprigora. Все права защищены."),
+        rights: tp(
+          isEn
+            ? "© 2026 Evgenia Podoprigora. All rights reserved."
+            : "© 2026 Evgenia Podoprigora. Все права защищены.",
+        ),
       },
     } satisfies PageProps,
     revalidate: 60,

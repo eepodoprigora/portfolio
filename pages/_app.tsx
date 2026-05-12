@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { ReactNode } from "react";
 import "@/application/css/app.scss";
-
 import { AnimatePresence } from "motion/react";
 import { CommonPageProps } from "@/shared/model/types";
 import { usePageTransitionStore } from "@/shared/model/page-transition";
@@ -16,6 +15,7 @@ import vhMobileFix from "@/shared/lib/dom/vh-mobile-fix";
 import { calculateScrollbarWidth } from "@/shared/lib/dom";
 import AppHead from "@/application/AppHead";
 import LayoutGrid from "@/shared/ui/LayoutGrid";
+import { Footer } from "@/widgets/Footer";
 
 type PageTransitionPresenceProps = {
   children: ReactNode;
@@ -83,6 +83,8 @@ const App = ({ Component, pageProps, router }: AppProps<CommonPageProps>) => {
             <Component {...pageProps} />
           </PageTransitionPresence>
         </AnimatedPage>
+
+        <Footer policy={pageProps.footerData?.policy ?? ""} />
       </main>
       {process.env.NODE_ENV === "development" && <LayoutGrid />}
     </Providers>

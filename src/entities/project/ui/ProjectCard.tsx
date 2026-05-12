@@ -1,9 +1,9 @@
 import Image from "next/image";
 import classNames from "classnames";
-import { IProject } from "../model";
+import { IProjectFlat } from "../model";
 import Link from "@/shared/ui/Link";
 
-type RawProps = IProject &
+type RawProps = IProjectFlat &
   React.HTMLAttributes<HTMLElement> & {
     setSlideRef?: (node: HTMLElement | null) => void;
     setMediaRef?: (node: HTMLDivElement | null) => void;

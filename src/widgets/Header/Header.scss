@@ -9,6 +9,15 @@
   height: var(--header-height);
   @include flex-center();
   z-index: 10;
+
+  html.no-scroll & {
+    overflow: hidden;
+    padding-right: calc(var(--scrollbar-width, 0px));
+
+    @include tablet {
+      padding-right: calc(var(--actual-scrollbar-width, 0px));
+    }
+  }
 }
 
 .header__wrapper {
@@ -30,4 +39,11 @@
   .about-page & {
     display: none;
   }
+}
+
+.header__main,
+.header__about {
+  --mr: 20px;
+  margin-left: auto;
+  margin-right: var(--mr);
 }

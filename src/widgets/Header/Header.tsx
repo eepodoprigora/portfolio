@@ -1,6 +1,7 @@
 import { normalizeHref } from "@/shared/lib/strings";
 import { useHeaderColorStore } from "@/shared/model/header-color";
 import { ILink } from "@/shared/model/types";
+import { LangSwitch } from "@/shared/ui/LangSwitch";
 import Link from "@/shared/ui/Link";
 import { RotateText } from "@/shared/ui/RotateText";
 import classNames from "classnames";
@@ -32,6 +33,7 @@ export const Header = ({ links }: Props) => {
             </Link>
           );
         })}
+        <LangSwitch />
       </div>
     </header>
   );

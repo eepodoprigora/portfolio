@@ -1,0 +1,18 @@
+@use "@/application/css/utils/mixins" as *;
+@use "@/application/css/base/variables" as *;
+
+.lang-switch--en-active {
+  .lang-switch__btn--en {
+    display: none;
+  }
+}
+
+.lang-switch--ru-active {
+  .lang-switch__btn--ru {
+    display: none;
+  }
+}
+
+.lang-switch__btn {
+  color: $blue;
+}

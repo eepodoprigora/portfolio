@@ -5,11 +5,11 @@ import { useSlider } from "@/shared/lib/use-slider";
 import { AnimatedCounter } from "@/shared/ui/AnimatedCounter";
 import { format2 } from "@/shared/lib/strings";
 import { useAppReadyStore } from "@/shared/model/app-ready";
-import { IProject, ProjectCard } from "@/entities/project";
+import { IProjectFlat, ProjectCard } from "@/entities/project";
 import { useInView } from "motion/react";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
-  projects: IProject[];
+  projects: IProjectFlat[];
 };
 
 export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
