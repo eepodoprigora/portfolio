@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
       },
       breadcrumbs: [],
       h1: project.name,
-      viewProject: tp(isEn ? "View project" : "Смотреть проект"),
+      viewProject: tp(isEn ? "View live" : "Смотреть проект"),
       project,
     },
   };

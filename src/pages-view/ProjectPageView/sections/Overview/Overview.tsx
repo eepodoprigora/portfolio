@@ -115,7 +115,11 @@ export const Overview = ({
             </div>
           )}
 
-          <a href={href} className="text-xl">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xl">
             <RotateText text={viewProject} />
           </a>
         </div>
