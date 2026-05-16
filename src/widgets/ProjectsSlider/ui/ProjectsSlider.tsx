@@ -64,24 +64,30 @@ export const ProjectsSlider = ({
   };
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
     const hideScrollHint = () => {
-      clearTimeout(timeout);
+      scrollHintRef.current?.classList.add("is-hidden");
 
-      timeout = setTimeout(() => {
-        scrollHintRef.current?.classList.add("is-hidden");
-      }, 2000);
+      document.removeEventListener("scroll", hideScrollHint);
+      document.removeEventListener("touchstart", hideScrollHint);
+      document.removeEventListener("wheel", hideScrollHint);
     };
+
+    document.addEventListener("scroll", hideScrollHint, {
+      passive: true,
+    });
 
     document.addEventListener("touchstart", hideScrollHint, {
       passive: true,
     });
 
-    return () => {
-      clearTimeout(timeout);
+    document.addEventListener("wheel", hideScrollHint, {
+      passive: true,
+    });
 
+    return () => {
+      document.removeEventListener("scroll", hideScrollHint);
       document.removeEventListener("touchstart", hideScrollHint);
+      document.removeEventListener("wheel", hideScrollHint);
     };
   }, []);
 

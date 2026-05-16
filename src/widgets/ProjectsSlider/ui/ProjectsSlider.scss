@@ -98,22 +98,25 @@
 }
 
 .projects-slider__scroll {
-  display: none;
+  --pv: 10px;
+  --ph: 15px;
+  --t: 50%;
+  --l: 10%;
+
+  padding: var(--pv) var(--ph);
+  color: $blue;
+  position: absolute;
+  top: var(--t);
+  left: var(--l);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-transform: uppercase;
+  transition: opacity 0.5s $app-default-easing;
 
   @include tablet {
-    --pv: 10px;
-    --ph: 15px;
-
-    padding: var(--pv) var(--ph);
-    color: $blue;
-    display: block;
-    position: absolute;
-    top: 75%;
-    left: 50%;
+    --t: 75%;
+    --l: 50%;
     transform: translateX(-50%);
-    z-index: 10;
-    text-transform: uppercase;
-    transition: opacity 0.5s $app-default-easing;
   }
 
   &::after {
