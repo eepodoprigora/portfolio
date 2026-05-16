@@ -10,11 +10,11 @@ import { AppLocale } from "@/shared/сonfig/const";
 
 const IndexPage = ({
   h1,
-  projects,
+  projectsSectionData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <IndexPageView h1={h1} projects={projects} />
+      <IndexPageView h1={h1} projectsSectionData={projectsSectionData} />
     </>
   );
 };
@@ -39,7 +39,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ locale }) => {
       },
       breadcrumbs: [],
       h1: locale === "en" ? "Evgenia's Portfolio" : "Портфолио Евгении",
-      projects,
+      projectsSectionData: {
+        projects,
+        scrollBtn: locale === "en" ? "Scroll Down" : "Скролл вниз",
+      },
     } satisfies PageProps,
     revalidate: 60,
   };

@@ -1,15 +1,20 @@
-import { IProjectFlat } from "@/entities/project";
 import DefaultLayout from "@/shared/ui/DefaultLayout";
-import { ProjectsSlider } from "@/widgets/ProjectsSlider";
+import {
+  ProjectsSlider,
+  ProjectsSliderRawProps,
+} from "@/widgets/ProjectsSlider";
 
-export type RawProps = { h1: string; projects: IProjectFlat[] };
+export type RawProps = {
+  h1: string;
+  projectsSectionData: ProjectsSliderRawProps;
+};
 
-const IndexPageView = ({ h1, projects }: RawProps) => {
+const IndexPageView = ({ h1, projectsSectionData }: RawProps) => {
   return (
     <DefaultLayout>
       <div className="index__content">
         <h1 className="visually-hidden">{h1}</h1>
-        <ProjectsSlider projects={projects} />
+        <ProjectsSlider {...projectsSectionData} />
       </div>
     </DefaultLayout>
   );

@@ -42,10 +42,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-  // .projects-slider--ready & {
-  //   transform: translateX(0);
-  // }
 }
 
 .projects-slider__webgl {
@@ -98,5 +94,69 @@
 
   @include tablet() {
     --bottom: 7svh;
+  }
+}
+
+.projects-slider__scroll {
+  display: none;
+
+  @include tablet {
+    --pv: 10px;
+    --ph: 15px;
+
+    padding: var(--pv) var(--ph);
+    color: $blue;
+    display: block;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-transform: uppercase;
+    transition: opacity 0.5s $app-default-easing;
+  }
+
+  &::after {
+    --h: 24px;
+    --w: 24px;
+
+    content: "";
+    position: absolute;
+    width: var(--w);
+    height: var(--h);
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+    mask-image: url("/static/icons/arrow-top.svg");
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    background-color: $blue;
+
+    animation: scroll-arrow-soft 2s cubic-bezier(0.25, 0.25, 0, 1) infinite;
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes scroll-arrow-soft {
+  0% {
+    transform: translateX(-50%) translateY(-6px) rotate(180deg);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(10px) rotate(180deg);
+    opacity: 0;
   }
 }

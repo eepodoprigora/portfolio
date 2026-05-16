@@ -1,1 +1,1 @@
-export { ProjectsSlider } from './ui'
+export { ProjectsSlider, type ProjectsSliderRawProps } from './ui'

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import classNames from "classnames";
 import { useThreeProjectsOverlay } from "../model";
 import { useSlider } from "@/shared/lib/use-slider";
@@ -8,11 +8,19 @@ import { useAppReadyStore } from "@/shared/model/app-ready";
 import { IProjectFlat, ProjectCard } from "@/entities/project";
 import { useInView } from "motion/react";
 
-type Props = React.HTMLAttributes<HTMLElement> & {
+export type RawProps = {
   projects: IProjectFlat[];
+  scrollBtn: string;
 };
 
-export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
+type Props = React.HTMLAttributes<HTMLElement> & RawProps;
+
+export const ProjectsSlider = ({
+  projects,
+  scrollBtn,
+  className,
+  ...props
+}: Props) => {
   const rootRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -20,6 +28,7 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
   const slidesRef = useRef<HTMLElement[]>([]);
   const mediaRefs = useRef<HTMLDivElement[]>([]);
   const inView = useInView(rootRef);
+  const scrollHintRef = useRef<HTMLDivElement>(null);
 
   const appReady = useAppReadyStore((s) => s.appReady);
 
@@ -53,6 +62,28 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
     if (!node) return;
     mediaRefs.current[index] = node;
   };
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const hideScrollHint = () => {
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        scrollHintRef.current?.classList.add("is-hidden");
+      }, 2000);
+    };
+
+    document.addEventListener("touchstart", hideScrollHint, {
+      passive: true,
+    });
+
+    return () => {
+      clearTimeout(timeout);
+
+      document.removeEventListener("touchstart", hideScrollHint);
+    };
+  }, []);
 
   return (
     <section
@@ -89,6 +120,9 @@ export const ProjectsSlider = ({ projects, className, ...props }: Props) => {
               active={index === currentIndex}
             />
           ))}
+        </div>
+        <div className="projects-slider__scroll text-s" ref={scrollHintRef}>
+          {scrollBtn}
         </div>
       </div>
     </section>
