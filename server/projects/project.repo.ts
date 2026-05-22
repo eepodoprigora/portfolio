@@ -140,6 +140,42 @@ const rotormineDetail: ProjectDetailBase = {
     },
 };
 
+const laboratoryDetail = {
+    tags: ["Next.js", "TypeScript", "SCSS", "Optimization", "Claude", "Cursor"],
+    video: [{ src: "/static/projects/laboratory/video.mp4", type: "video/mp4" }],
+    images: [
+        { src: "/static/projects/laboratory/1.jpg" },
+        { src: "/static/projects/laboratory/2.jpg" },
+        { src: "/static/projects/laboratory/3.jpg" },
+        { src: "/static/projects/laboratory/4.jpg" },
+    ],
+
+    ru: {
+        sections: {
+            complexity: tp(
+                "Проект реализован в сжатые сроки: разработала структуру, адаптивный интерфейс и анимации. Для ускорения разработки использовала AI-инструменты.",
+            ),
+            result: [
+                tp("Проект запущен без потери качества и адаптирован под мобильные и десктопные устройства"),
+                tp("Анимации и структура интерфейса сделали взаимодействие с сайтом более вовлекающим"),
+                tp("После запуска количество обращений от клиентов выросло примерно на 30%"),
+            ],
+        },
+    },
+
+    en: {
+        sections: {
+            complexity:
+                "The project was delivered within a tight timeline: I implemented the structure, responsive UI, and animations. AI tools were used to speed up development.",
+            result: [
+                "The project was launched without compromising quality and adapted for both mobile and desktop devices.",
+                "Animations and interface structure made the user experience more engaging.",
+                "After launch, the number of client inquiries increased by around 30%.",
+            ],
+        },
+    },
+};
+
 const khamovnikiDetail: ProjectDetailBase = {
     tags: ["HTML", "SCSS", "JavaScript", "GSAP"],
     video: [],
@@ -222,11 +258,11 @@ const dominantaDetail: ProjectDetailBase = {
     ru: {
         sections: {
             complexity: tp(
-                "Слайдер с кастомной стрелкой направления: в левой части экрана — назад, в правой — вперёд.",
+                "Сайт недвижимости с кастомным слайдером: курсор меняет направление в зависимости от позиции на экране — левая часть назад, правая вперёд. Стандартные решения не подходили под это поведение.",
             ),
             result: [
-                tp("Стрелка реагирует на позицию курсора на экране — интерфейс ведёт пользователя без явных подсказок"),
-                tp("Анимации по скроллу реализованы без просадок FPS — работают плавно на мобильных и десктопе"),
+                tp("Навигация по слайдеру не требует объяснений — пользователь интуитивно понимает управление и остаётся в контенте дольше"),
+                tp("Scroll-анимации работают без просадок FPS на мобильных и десктопе — премиум-ощущение не ломается на слабых устройствах"),
             ],
         },
     },
@@ -234,10 +270,10 @@ const dominantaDetail: ProjectDetailBase = {
     en: {
         sections: {
             complexity:
-                "Custom directional slider: the left side of the screen moves backward, the right side moves forward.",
+                "Real estate website with a custom slider: the cursor direction changes based on its position on screen — left side goes back, right side goes forward. No ready-made solution fit this behavior.",
             result: [
-                "The arrow reacts to the cursor position, guiding the user without explicit UI hints.",
-                "Scroll animations were implemented without FPS drops and work smoothly on both mobile and desktop.",
+                "Slider navigation needs no explanation — users intuitively understand the controls and stay engaged with the content longer.",
+                "Scroll animations run without FPS drops on both mobile and desktop, keeping the premium feel on lower-end devices.",
             ],
         },
     },
@@ -256,11 +292,11 @@ const iliynkaDetail: ProjectDetailBase = {
     ru: {
         sections: {
             complexity: tp(
-                "Карта с появлением маркеров по скроллу и однонаправленная подача контента — технически сложно, визуально должно быть незаметно.",
+                "Сайт премиум-ЖК: карта с категориями инфраструктуры — маркеры появляются по скроллу, контент подаётся однонаправленно. Всё должно ощущаться как единое кинематографичное повествование, а не набор блоков.",
             ),
             result: [
-                tp("Закрыла весь фронтенд премиум-проекта самостоятельно — верстка, анимации, карта с кастомной логикой по скроллу"),
-                tp("Добилась плавной работы анимаций без просадок FPS"),
+                tp("Карта показывает окружение ЖК — транспорт, школы, рестораны, достопримечательности — и отвечает на вопрос покупателя «что рядом» без лишних кликов"),
+                tp("Плавные анимации без просадок FPS на мобильных и десктопе — премиум-ощущение сохраняется на любом устройстве"),
             ],
         },
     },
@@ -268,10 +304,10 @@ const iliynkaDetail: ProjectDetailBase = {
     en: {
         sections: {
             complexity:
-                "A map with markers appearing on scroll and a one-directional content flow. Technically complex, but visually it had to feel seamless.",
+                "Website for a premium residential complex: an infrastructure map with scroll-triggered markers and a one-directional content flow. Everything had to feel like a single cinematic narrative, not a set of separate blocks.",
             result: [
-                "Delivered the full frontend of a premium project independently: layout, animations, and a map with custom scroll-based logic.",
-                "Achieved smooth animation performance without FPS drops.",
+                "The map answers the buyer's key question — 'what's nearby' — by showing transport, schools, restaurants, and landmarks without extra clicks.",
+                "Smooth animations without FPS drops on both mobile and desktop keep the premium feel across all devices.",
             ],
         },
     },
@@ -289,11 +325,11 @@ const whitemarkDetail: ProjectDetailBase = {
     ru: {
         sections: {
             complexity: tp(
-                "Изображение уменьшается и трансформируется в строку текста, двигаясь вместе с ней. Готовых решений нет — реализовала собственную логику на GSAP.",
+                "Анимация для портфолио-сайта агентства: изображение кейса уменьшается и перетекает в строку текста, двигаясь вместе с ней. Стандартных решений нет — спроектировала логику под это поведение с нуля на GSAP.",
             ),
             result: [
-                tp("Реализовала анимацию трансформации изображения в строку без готовых библиотек — нестандартное решение под нестандартную задачу"),
-                tp("Движение и композиция расставляют акценты сами — пользователь читает кейс в нужном порядке без дополнительных UI-подсказок"),
+                tp("Анимация держит внимание на переходах между кейсами — пользователь не теряет контекст и дочитывает до конца"),
+                tp("Нестандартный визуал выделяет агентство среди конкурентов — портфолио запоминается и работает на доверие к бренду"),
             ],
         },
     },
@@ -301,10 +337,10 @@ const whitemarkDetail: ProjectDetailBase = {
     en: {
         sections: {
             complexity:
-                "An image shrinks and transforms into a text line, then moves together with it. There was no ready-made solution, so I built custom GSAP logic.",
+                "Animation for the agency's portfolio site: a case image shrinks and flows into a text line, moving along with it. No ready-made solution existed, so I designed the behavior logic from scratch using GSAP.",
             result: [
-                "Built an image-to-text-line transformation animation without ready-made libraries.",
-                "Motion and composition guide the reading flow, so the user follows the case in the intended order without extra UI hints.",
+                "The animation keeps attention during case transitions — users don't lose context and read through to the end.",
+                "The distinctive visual sets the agency apart from competitors — the portfolio leaves an impression and builds brand trust.",
             ],
         },
     },
@@ -313,6 +349,7 @@ const whitemarkDetail: ProjectDetailBase = {
 const PROJECTS_DETAILS: Record<string, ProjectDetailBase> = {
     vki: vkiDetail,
     rotormine: rotormineDetail,
+    laboratory: laboratoryDetail,
     khamovniki: khamovnikiDetail,
     obydenskiy: obydenskiyDetail,
     dominanta: dominantaDetail,

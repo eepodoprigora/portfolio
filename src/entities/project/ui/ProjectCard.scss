@@ -20,6 +20,12 @@
   }
 }
 
+.project-card__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .project-card__inner {
   display: flex;
   flex-direction: column;

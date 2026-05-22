@@ -36,7 +36,7 @@ export const PROJECTS_BASE = [
         ru: {
             name: "Rotormine",
             summary: tp(
-                "Маркетплейс люксовых часов — от Rolex до Patek Philippe. Каталог, фильтры, trade-in.",
+                "Маркетплейс люксовых брендов — от Rolex до Patek Philippe. Каталог, фильтры, trade-in.",
             ),
         },
 
@@ -46,7 +46,26 @@ export const PROJECTS_BASE = [
                 "Luxury watch marketplace featuring Rolex, Patek Philippe, and more. Catalog, filters, and trade-in system.",
         },
     },
+    {
+        id: "laboratory",
+        href: "https://www.laboratoryfit.com/",
+        previewImg: {
+            src: "/static/previews/laboratory-preview.jpg",
+        },
+        category: "B2B / Industrial",
 
+        ru: {
+            name: "Лаборатория стройности",
+            summary: tp(
+                "Фитнесс студия. Камерный формат, персональный подход. Флагманское направление — рекомпозиция тела.",
+            ),
+        },
+        en: {
+            name: "LaboratoryFit",
+            summary:
+                "Fitness studio. Intimate format, personalized approach. Our flagship focus is body recomposition.",
+        },
+    },
     {
         id: "khamovniki",
         href: "https://khamovniki12.ru/",
@@ -61,7 +80,6 @@ export const PROJECTS_BASE = [
                 "Клубный дом де-люкс в Москве — иммерсивный промо-сайт для аудитории с бюджетом от 100 млн.",
             ),
         },
-
         en: {
             name: "Khamovniki 12",
             summary:
