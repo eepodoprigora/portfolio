@@ -86,8 +86,20 @@ export const useSlider = ({
         updateSizes();
         window.addEventListener("resize", updateSizes);
 
+        //
+        const slides = slidesRef.current;
+        let ro: ResizeObserver | undefined;
+
+        if (slidesCount && slides.length === slidesCount) {
+            ro = new ResizeObserver(() => {
+                updateSizes();
+            });
+            slides.forEach((slide) => ro?.observe(slide));
+        }
+
         return () => {
             window.removeEventListener("resize", updateSizes);
+            ro?.disconnect();
         };
     }, [slidesRef, slidesCount]);
 

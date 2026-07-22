@@ -42,6 +42,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  touch-action: none;
 }
 
 .projects-slider__webgl {
@@ -72,6 +73,7 @@
   transform: translate3d(var(--progress), -50%, 0);
   will-change: transform;
   backface-visibility: hidden;
+  touch-action: none;
 
   @include tablet {
     top: 45%;
