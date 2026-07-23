@@ -8,7 +8,8 @@
   --ratio: 300 / 400;
 
   width: 100vw;
-  height: vh(100);
+  height: 100vh;
+  height: 100svh;
   overflow: hidden;
 
   touch-action: none;
@@ -83,7 +84,8 @@
 .projects-slider__counter {
   --bottom: 3.5rem;
   --p: 10px;
-  z-index: 11;
+  z-index: 12;
+  isolation: isolate;
 
   position: absolute;
   bottom: var(--bottom);
