@@ -79,6 +79,10 @@
   @include tablet {
     top: 45%;
   }
+
+  @include mobile {
+    top: 50%;
+  }
 }
 
 .projects-slider__counter {
