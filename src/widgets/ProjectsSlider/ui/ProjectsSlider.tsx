@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 import { useThreeProjectsOverlay } from "../model";
 import { useSlider } from "@/shared/lib/use-slider";
@@ -31,6 +31,13 @@ export const ProjectsSlider = ({
   const scrollHintRef = useRef<HTMLDivElement>(null);
 
   const appReady = useAppReadyStore((s) => s.appReady);
+
+  const [forceReady, setForceReady] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setForceReady(true), 3500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const { progress, currentIndex } = useSlider({
     rootRef,
@@ -96,7 +103,7 @@ export const ProjectsSlider = ({
       {...props}
       ref={rootRef}
       className={classNames("projects-slider", className, {
-        "projects-slider--ready": inView && appReady,
+        "projects-slider--ready": (inView && appReady) || forceReady,
       })}>
       <div className="projects-slider__counter" aria-hidden="true">
         <AnimatedCounter value={currentIndex + 1} digits={2} />
