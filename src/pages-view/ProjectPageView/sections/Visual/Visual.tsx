@@ -29,7 +29,7 @@ export const Visual = ({ video, images, className, ref, ...props }: Props) => {
           images.length &&
           images.map((image, i) => (
             <div className="visual__image-wrapper" key={i}>
-              <Parallaxed scalePower={0.2} className="responsive__item">
+              <Parallaxed scalePower={0.1} className="responsive__item">
                 <Image
                   src={image?.src ?? ""}
                   alt={image?.alt ?? ""}

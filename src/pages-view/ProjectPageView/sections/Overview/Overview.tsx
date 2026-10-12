@@ -44,7 +44,7 @@ export const Overview = ({
       ref={mergeRefs([ref, rootRef])}>
       <div className="wrapper overview__wrapper">
         <div className="overview__media">
-          <Parallaxed scalePower={0.2} className="responsive__item">
+          <Parallaxed scalePower={0.12} className="responsive__item">
             <Image
               src={image?.src ?? ""}
               alt={image?.alt ?? ""}
