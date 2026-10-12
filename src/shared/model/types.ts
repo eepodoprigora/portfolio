@@ -4,6 +4,8 @@ export type PageMeta = Partial<{
     title: string;
     description: string;
     ogImage: string;
+    siteName: string;
+    socialTitle: string;
 }>;
 
 export type AppBreadcrumbs = {

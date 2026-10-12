@@ -63,6 +63,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
       meta: {
         ...commonPageProps.meta,
         title: project.name,
+        socialTitle: project.name,
         description: project.summary,
       },
       breadcrumbs: [],

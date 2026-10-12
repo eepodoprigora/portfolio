@@ -7,6 +7,8 @@ interface Props {
     title: string;
     description: string;
     ogImage: string;
+    siteName: string;
+    socialTitle: string;
   }>;
 }
 
@@ -14,6 +16,7 @@ const AppHead = ({ meta = {} }: Props) => {
   const router = useRouter();
   const pathname = router.asPath.split("?")[0];
   const title = [meta.title, meta.baseTitle].filter(Boolean).join(" — ");
+  const socialTitle = meta.socialTitle || title;
 
   return (
     <Head>
@@ -34,14 +37,15 @@ const AppHead = ({ meta = {} }: Props) => {
       )}
       <meta property="og:locale" content="ru" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={title} />
+      {meta.siteName && <meta property="og:site_name" content={meta.siteName} />}
+      <meta property="og:title" content={socialTitle} />
       {meta.description && (
         <meta property="og:description" content={meta.description} />
       )}
       {meta.ogImage && <meta property="og:image" content={meta.ogImage} />}
       <meta name="twitter:card" content="summary" />
       {meta.ogImage && <meta name="twitter:image" content={meta.ogImage} />}
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={socialTitle} />
       {meta.description && (
         <meta name="twitter:description" content={meta.description} />
       )}

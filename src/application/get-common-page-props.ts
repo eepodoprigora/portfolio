@@ -6,6 +6,7 @@ type Locale = 'ru' | 'en';
 const i18n = {
     ru: {
         baseTitle: 'Портфолио',
+        siteName: 'Портфолио Евгении',
         description: 'Портфолио — Евгения Подопригора, креативный фронтенд разработчик',
         about: 'Обо мне',
         home: 'Главная',
@@ -13,6 +14,7 @@ const i18n = {
     },
     en: {
         baseTitle: 'Portfolio',
+        siteName: "Evgenia’s Portfolio",
         description: 'Portfolio — Evgenia Podoprigora, creative frontend developer',
         about: 'About',
         home: 'Home',
@@ -28,6 +30,7 @@ export const getCommonPageProps = async (
     return {
         meta: {
             baseTitle: t.baseTitle,
+            siteName: t.siteName,
             description: t.description,
             ogImage: '/static/about/hero_mob.jpg',
         },
