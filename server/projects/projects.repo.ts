@@ -26,6 +26,29 @@ export const PROJECTS_BASE = [
     },
 
     {
+        id: "uprocon",
+        href: "https://uprocon.ru/",
+        previewImg: {
+            src: "/static/previews/uprocon-preview.jpg",
+        },
+        category: "SaaS / Engineering",
+
+        ru: {
+            name: "Uprocon",
+            summary: tp(
+                "SaaS-платформа для инженеров и проектировщиков. Расчёт строительных нагрузок, управление материалами, экспорт документов и платные подписки.",
+            ),
+        },
+
+        en: {
+            name: "Uprocon",
+            summary:
+                "SaaS platform for structural engineers and designers. Structural load calculations, material management, document export, and paid subscriptions.",
+        },
+    },
+
+
+    {
         id: "rotormine",
         href: "https://rotormine.ru/",
         previewImg: {

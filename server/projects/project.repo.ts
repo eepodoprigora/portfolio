@@ -140,6 +140,65 @@ const rotormineDetail: ProjectDetailBase = {
     },
 };
 
+const uproconDetail: ProjectDetailBase = {
+    tags: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Zustand",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma",
+        "Docker",
+        "REST API",
+        "ЮKassa",
+    ],
+    video: [
+        { src: "/static/projects/uprocon/video.mp4", type: "video/mp4" },
+    ],
+    images: [
+        { src: "/static/projects/uprocon/1.jpg" },
+        { src: "/static/projects/uprocon/2.jpg" },
+        { src: "/static/projects/uprocon/3.jpg" },
+        { src: "/static/projects/uprocon/4.jpg" },
+    ],
+
+    ru: {
+        sections: {
+            complexity: tp(
+                "С нуля спроектировала и разработала фронтенд инженерной SaaS-платформы с расчётной логикой, монетизацией и собственной CMS. Реализовала динамические таблицы с автоматическим пересчётом нагрузок, каталог материалов и экспорт документов в PDF, Word и Excel. Отдельная часть проекта — полноценная админ-панель с аналитикой, управлением пользователями, созданием тестовых аккаунтов и редактированием практически всего контента без участия разработчика. Также участвовала в разработке бэкенда и настройке продакшен-инфраструктуры.",
+            ),
+            result: [
+                tp(
+                    "Автоматизировала инженерные расчёты: подбор материалов, вычисление нагрузок и формирование готовой документации вместо ручной работы с таблицами",
+                ),
+                tp(
+                    "Реализовала коммерческую модель SaaS: регистрацию, авторизацию, бесплатные лимиты, тарифы, подписки и интеграцию онлайн-платежей через ЮKassa",
+                ),
+                tp(
+                    "Создала административный интерфейс с аналитикой посещений и регистраций, управлением аккаунтами и тарифами, тестовыми доступами и редактированием контента без изменений в коде",
+                ),
+                tp(
+                    "Довела продукт до продакшена: архитектура фронтенда, интеграция REST API, участие в серверной разработке, Docker, настройка VPS и деплой",
+                ),
+            ],
+        },
+    },
+
+    en: {
+        sections: {
+            complexity:
+                "Architected and built the frontend of an engineering SaaS platform from scratch, combining calculation workflows, monetization, and a custom CMS. Implemented dynamic tables with automatic load calculations, a material catalog, and PDF, Word, and Excel export. A major part of the project was a full-featured admin dashboard with analytics, user management, test account creation, and the ability to edit nearly all website content without developer involvement. Also contributed to backend development and production infrastructure.",
+            result: [
+                "Automated engineering workflows, from material selection and structural load calculations to generating ready-to-use documentation, replacing manual spreadsheet work.",
+                "Implemented SaaS monetization features: registration, authentication, free usage limits, subscription plans, and YooKassa payment integration.",
+                "Built an admin dashboard with visitor and registration analytics, account and plan management, test access controls, and content editing without code changes.",
+                "Delivered the product to production: frontend architecture, REST API integration, backend contributions, Docker, VPS configuration, and deployment.",
+            ],
+        },
+    },
+};
+
 const laboratoryDetail = {
     tags: ["Next.js", "TypeScript", "SCSS", "Optimization", "Claude", "Cursor"],
     video: [{ src: "/static/projects/laboratory/video.mp4", type: "video/mp4" }],
@@ -348,6 +407,7 @@ const whitemarkDetail: ProjectDetailBase = {
 
 const PROJECTS_DETAILS: Record<string, ProjectDetailBase> = {
     vki: vkiDetail,
+    uprocon: uproconDetail,
     rotormine: rotormineDetail,
     laboratory: laboratoryDetail,
     khamovniki: khamovnikiDetail,
